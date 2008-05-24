@@ -34,6 +34,8 @@ run_hook ()
         return
     fi
 
+    /sbin/modprobe loop
+
     # Path to compressed base system
     sysSqf=${cdmount}/system.sqf
 
