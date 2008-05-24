@@ -1,0 +1,60 @@
+larch-5
+
+larch-5 uses a simpler live-medium structure than larch-4, using a union-root.
+
+Session saving on CD/DVD is dropped, but is retained and enhanced on USB-stick.
+
+Basic session saving is now simply a matter of compressing the overlay layer
+of the union. That should speed up session saving a bit. There is also a
+second stage of session saving, more akin to the old version, where a
+read-only (squashfs) layer between the main system and the top overlay
+is rewritten, merging in the top overlay.
+
+To further increase speed I am trying tar and lzo-compression instead of
+squashfs for the top overlay.
+
+If the total overlay size gets big, there should be support for recreating
+the live system (using larchify).
+
+
+system.sqf: The main squashed system, mounted to union root in initramfs
+
+overlay.ovl: The saved state of the writable union layer, unpacked in initramfs
+
+mods.sqf: A union layer (between system and overlay). Can be updated by
+          merging in overlay. Doesn't contain changes in /etc.
+
+
+Building:
+=========
+
+Export from svn:
+   svn export svn://svn.berlios.de/larch/trunk
+
+Then run 'mklarchrepo'. This will create a repository of the larch
+packages, at larchrepo.
+
+Copy this directory to an empty working directory (or make a symlink
+from 'larchrepo' in the empty directory to the repository).
+
+Then copy 'larch-setup' to the working directory and edit it so that
+the local 'REPO=' entry becomes operative. Then run it.
+Alternatively, install the larch package with 'pacman -U'.
+
+
+tar / lzo:
+==========
+
+Compress:
+tar -cf - src | lzop > src.tar.lzo
+
+Uncompress:
+lzop -d < src.tar.lzo | tar -xf -
+
+Could use lzf (liblzf) instead of lzo, but lzo may be slightly better?
+lzf is much smaller, and easy to compile - can also use klcc.
+Both seem a lot faster at compressing than squashfs or gzip (more than
+twice as fast?), decompression is similar in all cases, but gzip may be
+very slightly slower. squashfs looks better than gzip - smaller file,
+slightly faster - but it may just be the settings. lzf/lzo lose a few
+percent of compression (squashfs ~10% smaller?).
