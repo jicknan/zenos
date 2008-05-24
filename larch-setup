@@ -21,9 +21,9 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.05.15
+# 2008.05.24
 
-REPO="ftp://ftp.berlios.de/pub/larch/larch5/i686"
+REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
 #REPO=file://$( readlink -f larchrepo )
 
 if [ "$1" = "-h" ]; then

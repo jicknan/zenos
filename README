@@ -29,7 +29,7 @@ Building:
 =========
 
 Export from svn:
-   svn export svn://svn.berlios.de/larch/trunk
+   svn export svn://svn.berlios.de/larch/branches/larch5.3
 
 Then run 'mklarchrepo'. This will create a repository of the larch
 packages, at larchrepo.
