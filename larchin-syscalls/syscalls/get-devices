@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# get-devices
+
+# For each device return a line with ':'-separated device, size, device type
+
+parted -lm | grep '^/dev' | cut -d':' -f1,2,7
