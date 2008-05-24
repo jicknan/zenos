@@ -1,0 +1,12 @@
+# Set the keymap
+xkmap-set
+
+case ${desktop} in
+    xfce ) exec startxfce4 ;;
+
+    gnome ) exec gnome-session ;;
+
+    kde ) exec startkde ;;
+
+    * ) ;;
+esac

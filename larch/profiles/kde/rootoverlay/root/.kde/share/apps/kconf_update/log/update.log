@@ -1,0 +1,344 @@
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/audiocd.upd' for new updates
+2006-10-10T10:51:35 audiocd.upd: Found new update '1'
+2006-10-10T10:51:35 audiocd.upd: Running script 'upgrade-metadata.sh'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/cervisia.upd' for new updates
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20021228'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20021229'
+2006-10-10T10:51:35 cervisia.upd: Running script 'move_repositories.pl'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030116'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030117'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030118'
+2006-10-10T10:51:35 cervisia.upd: Skipping update 'kde3.2/20030118'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030205'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030210'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030211'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030212'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030216'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030725'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030730'
+2006-10-10T10:51:35 cervisia.upd: Running script 'change_colors.pl'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20030829'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.2/20031014'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.4/20041112'
+2006-10-10T10:51:35 cervisia.upd: Running script 'cervisia-normalize_cvsroot.pl'
+2006-10-10T10:51:35 cervisia.upd: Found new update 'kde3.4/20041207'
+2006-10-10T10:51:35 cervisia.upd: Running script 'cervisia-change_repos_list.pl'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/favicons.upd' for new updates
+2006-10-10T10:51:35 favicons.upd: Found new update 'kde3_2'
+2006-10-10T10:51:35 favicons.upd: Running script 'move_favicons.sh'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/gwenview_1.4_osdformat.upd' for new updates
+2006-10-10T10:51:35 gwenview_1.4_osdformat.upd: Found new update 'osdformat'
+2006-10-10T10:51:35 gwenview_1.4_osdformat.upd: Running script 'gwenview_1.4_osdformat.sh'
+2006-10-10T10:51:35 gwenview_1.4_osdformat.upd: Updating gwenviewrc:pixmap widget:osdFormat to ''
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/gwenview_thumbnail_size.upd' for new updates
+2006-10-10T10:51:35 gwenview_thumbnail_size.upd: Found new update 'gwenview_thumbnail_size'
+2006-10-10T10:51:35 gwenview_thumbnail_size.upd: Running script 'gwenview_thumbnail_size.sh'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kaccel.upd' for new updates
+2006-10-10T10:51:35 kaccel.upd: Found new update 'kde3.3/r1'
+2006-10-10T10:51:35 kaccel.upd: Running script 'convertShortcuts.pl'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kate-2.4.upd' for new updates
+2006-10-10T10:51:35 kate-2.4.upd: Found new update 'kate2.4'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kaudiocreator-libkcddb.upd' for new updates
+2006-10-10T10:51:35 kaudiocreator-libkcddb.upd: Found new update 'kaudiocreator-libkcddb'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kaudiocreator-meta.upd' for new updates
+2006-10-10T10:51:35 kaudiocreator-meta.upd: Found new update '3'
+2006-10-10T10:51:35 kaudiocreator-meta.upd: Running script 'upgrade-kaudiocreator-metadata.sh'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kbabel-difftoproject.upd' for new updates
+2006-10-10T10:51:35 kbabel-difftoproject.upd: Found new update 'kde34'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kbabel-project.upd' for new updates
+2006-10-10T10:51:35 kbabel-project.upd: Found new update 'kde33'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kbabel-projectrename.upd' for new updates
+2006-10-10T10:51:35 kbabel-projectrename.upd: Found new update 'kde34'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 4 : 'Author-Email,AuthorEmail'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 5 : 'Author-Name,AuthorName'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 6 : 'Local-Author-Name,LocalAuthorName'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 7 : 'Update-Charset,UpdateCharset'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 8 : 'Update-Encoding,UpdateEncoding'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 9 : 'Update-Language-Team,UpdateLanguageTeam'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 10 : 'Update-Last-Translator,UpdateLastTranslator'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 11 : 'Update-Project,UpdateProject'
+2006-10-10T10:51:35 kbabel-projectrename.upd: parse error in line 12 : 'Update-Revision,UpdateRevision'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kcalcrc.upd' for new updates
+2006-10-10T10:51:35 kcalcrc.upd: Found new update 'KDE_3_2_0'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kcharselect.upd' for new updates
+2006-10-10T10:51:35 kcharselect.upd: Found new update '1'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kcmcddb-emailsettings.upd' for new updates
+2006-10-10T10:51:35 kcmcddb-emailsettings.upd: Found new update 'kcmcddb_emailsettings'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kcmdisplayrc.upd' for new updates
+2006-10-10T10:51:35 kcmdisplayrc.upd: Found new update 'kde3'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kcookiescfg.upd' for new updates
+2006-10-10T10:51:35 kcookiescfg.upd: Found new update 'kde2.2/b1'
+2006-10-10T10:51:35 kcookiescfg.upd: Found new update 'kde3.1/cvs'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kded.upd' for new updates
+2006-10-10T10:51:35 kded.upd: Found new update 'kde3.0'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kdeprintrc.upd' for new updates
+2006-10-10T10:51:35 kdeprintrc.upd: Found new update 'kde-3.1-toolbar'
+2006-10-10T10:51:35 kdeprintrc.upd: Skipping kdeprintrc:General:ViewMenuBar, already exists.
+2006-10-10T10:51:35 kdeprintrc.upd: RemoveKey removes kdeprintrc:General:ViewToolBar
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kfmclient_3_2.upd' for new updates
+2006-10-10T10:51:35 kfmclient_3_2.upd: Found new update 'kfmclient_3_2'
+2006-10-10T10:51:35 kfmclient_3_2.upd: Running script 'kfmclient_3_2_update.sh'
+2006-10-10T10:51:35 kfmclient_3_2.upd: Script removes kfmclientrc:Settings:StartNewKonqueror
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kghostview.upd' for new updates
+2006-10-10T10:51:35 kghostview.upd: Found new update '1changeToKConfigXT'
+2006-10-10T10:51:35 kghostview.upd: Found new update '2changeToKConfigXT'
+2006-10-10T10:51:35 kghostview.upd: Running script 'update-to-xt-names.pl'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/khotkeys_32b1_update.upd' for new updates
+2006-10-10T10:51:35 khotkeys_32b1_update.upd: Found new update 'kde32b1'
+2006-10-10T10:51:35 khotkeys_32b1_update.upd: Running script 'khotkeys_update' with arguments '--id kde32b1'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/khotkeys_printscreen.upd' for new updates
+2006-10-10T10:51:35 khotkeys_printscreen.upd: Found new update 'printscreen'
+2006-10-10T10:51:35 khotkeys_printscreen.upd: Running script 'khotkeys_update' with arguments '--id printscreen'
+2006-10-10T10:51:35 Checking update-file '/opt/kde/share/apps/kconf_update/kickerrc.upd' for new updates
+2006-10-10T10:51:35 kickerrc.upd: Found new update 'kde_3_1_sizeChanges'
+2006-10-10T10:51:35 kickerrc.upd: Running script 'kicker-3.1-properSizeSetting.pl'
+2006-10-10T10:51:35 kickerrc.upd: Found new update 'kde_3_4_reverseLayout'
+2006-10-10T10:51:35 kickerrc.upd: Running script 'kicker-3.4-reverseLayout'
+2006-10-10T10:51:36 kickerrc.upd: Found new update 'kde_3_5_taskbarEnums'
+2006-10-10T10:51:36 kickerrc.upd: Running script 'kicker-3.5-taskbarEnums.pl'
+2006-10-10T10:51:36 kickerrc.upd: Found new update 'kde_3_5_kconfigXTize'
+2006-10-10T10:51:36 kickerrc.upd: Running script 'kicker-3.5-kconfigXTize.pl'
+2006-10-10T10:51:36 kickerrc.upd: Updating kickerrc:menus:MenuEntryFormat to 'NameAndDescription'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/kio_help.upd' for new updates
+2006-10-10T10:51:36 kio_help.upd: Found new update 'kde3_2'
+2006-10-10T10:51:36 kio_help.upd: Running script 'move_kio_help_cache.sh'
+2006-10-10T10:51:36 [Script] mv: cannot stat `/root/.kde/share/apps/kio_help/cache': No such file or directory
+2006-10-10T10:51:36 [Script] rmdir: /root/.kde/share/apps/kio_help: No such file or directory
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/kioslave.upd' for new updates
+2006-10-10T10:51:36 kioslave.upd: Found new update 'kde2.2/r1'
+2006-10-10T10:51:36 kioslave.upd: Skipping update 'kde2.2/r1'
+2006-10-10T10:51:36 kioslave.upd: Found new update 'kde2.2/r2'
+2006-10-10T10:51:36 kioslave.upd: Running script 'useragent.pl'
+2006-10-10T10:51:36 kioslave.upd: Script removes kioslaverc:UserAgent:EntriesCount
+2006-10-10T10:51:36 kioslave.upd: Found new update 'kde2.2/r3'
+2006-10-10T10:51:36 kioslave.upd: Running script 'proxytype.pl'
+2006-10-10T10:51:36 kioslave.upd: Script removes kioslaverc:Proxy Settings:UseProxy
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/klipperrc.upd' for new updates
+2006-10-10T10:51:36 klipperrc.upd: Found new update '25082001'
+2006-10-10T10:51:36 klipperrc.upd: Running script 'klipper-1-2.pl'
+2006-10-10T10:51:36 klipperrc.upd: Found new update 'kde3.1'
+2006-10-10T10:51:36 klipperrc.upd: Running script 'klipper-kde31.sh'
+2006-10-10T10:51:36 klipperrc.upd: Updating klipperrc:General:AutoStart to 'true'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/klippershortcuts.upd' for new updates
+2006-10-10T10:51:36 klippershortcuts.upd: Found new update '04112002'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/kmail.upd' for new updates
+2006-10-10T10:51:36 kmail.upd: Found new update '1'
+2006-10-10T10:51:36 kmail.upd: Running script 'upgrade-transport.pl'
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Mailer
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Method
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Precommand
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Smtp Host
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Smtp Password
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Smtp Port
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:sending mail:Smtp Username
+2006-10-10T10:51:36 kmail.upd: Found new update '4'
+2006-10-10T10:51:36 kmail.upd: Found new update '5'
+2006-10-10T10:51:36 kmail.upd: Found new update '6'
+2006-10-10T10:51:36 kmail.upd: Found new update '7'
+2006-10-10T10:51:36 kmail.upd: Found new update '8'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-pgpidentity.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '9'
+2006-10-10T10:51:36 kmail.upd: Running script 'upgrade-signature.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.1-update-identities'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-upd-identities.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.1-use-identity-uoids'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.1-use-UOID-for-identities.pl'
+2006-10-10T10:51:36 [Script] Use of uninitialized value in hash element at /opt/kde/share/apps/kconf_update/kmail-3.1-use-UOID-for-identities.pl line 45.
+2006-10-10T10:51:36 [Script] Use of uninitialized value in concatenation (.) or string at /opt/kde/share/apps/kconf_update/kmail-3.1-use-UOID-for-identities.pl line 45.
+2006-10-10T10:51:36 [Script] Use of uninitialized value in hash element at /opt/kde/share/apps/kconf_update/kmail-3.1-use-UOID-for-identities.pl line 49.
+2006-10-10T10:51:36 [Script] Use of uninitialized value in concatenation (.) or string at /opt/kde/share/apps/kconf_update/kmail-3.1-use-UOID-for-identities.pl line 49.
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:General:Default Identity
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:Composer:previous-identity
+2006-10-10T10:51:36 kmail.upd: Updating kmailrc:Composer:previous-identity to ''
+2006-10-10T10:51:36 kmail.upd: Updating kmailrc:General:Default Identity to ''
+2006-10-10T10:51:36 kmail.upd: Found new update '3.1-new-mail-notification'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.1-update-new-mail-notification-settings.pl'
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:General:msgbox-on-mail
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:General:exec-on-mail
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:General:exec-on-mail-cmd
+2006-10-10T10:51:36 kmail.upd: Found new update '3.2-update-loop-on-goto-unread-settings'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.2-update-loop-on-goto-unread-settings.sh'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.1.4-dont-use-UOID-0-for-any-identity'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.1.4-dont-use-UOID-0-for-any-identity.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.2-misc'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.2-misc.sh'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.2-moves'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-use-ID-for-accounts'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3-use-ID-for-accounts.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-update-filter-rules'
+2006-10-10T10:51:36 kmail.upd: !! Script 'kmail-3.3-update-filter-rules.pl' not found in line 99 : 'Script=kmail-3.3-update-filter-rules.pl,perl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-move-identities-to-own-file'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3-move-identities.pl'
+2006-10-10T10:51:36 kmail.upd: Script removes kmailrc:General:Default Identity
+2006-10-10T10:51:36 kmail.upd: Updating emailidentities:General:Default Identity to ''
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-aegypten-kpgprc-to-kmailrc'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-aegypten-kpgprc-to-libkleopatrarc'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3-aegypten.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-aegypten-emailidentities-split-sign-encr-keys'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3-split-sign-encr-keys.sh'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3-misc'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3-misc.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.3b1-misc'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.3b1-misc.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.4'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.4-misc.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.4a'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.4b'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.4.1'
+2006-10-10T10:51:36 kmail.upd: Running script 'kmail-3.4.1-update-status-filters.pl'
+2006-10-10T10:51:36 kmail.upd: Found new update '3.5.4'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/knewsticker.upd' for new updates
+2006-10-10T10:51:36 knewsticker.upd: Found new update 'KNewsTicker-0.2'
+2006-10-10T10:51:36 knewsticker.upd: Running script 'knt-0.1-0.2.pl'
+2006-10-10T10:51:36 knewsticker.upd: Found new update 'KNewsTicker-0.2-Rename-KDE3'
+2006-10-10T10:51:36 knewsticker.upd: Found new update 'KNewsTicker-0.2-Rename-KDE3.1'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/konqsidebartng.upd' for new updates
+2006-10-10T10:51:36 konqsidebartng.upd: Found new update 'konqsidebartng_rc'
+2006-10-10T10:51:36 konqsidebartng.upd: Found new update 'konqsidebartng_entries'
+2006-10-10T10:51:36 konqsidebartng.upd: Running script 'move_konqsidebartng_entries.sh'
+2006-10-10T10:51:36 Checking update-file '/opt/kde/share/apps/kconf_update/konqueror_gestures_kde321_update.upd' for new updates
+2006-10-10T10:51:36 konqueror_gestures_kde321_update.upd: Found new update 'kde321'
+2006-10-10T10:51:36 konqueror_gestures_kde321_update.upd: Running script 'khotkeys_update' with arguments '--id konqueror_gestures_kde321'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/konsole.upd' for new updates
+2006-10-10T10:51:37 konsole.upd: Found new update 'kde2.2/r1'
+2006-10-10T10:51:37 konsole.upd: Found new update 'kde3.0/r1'
+2006-10-10T10:51:37 konsole.upd: Running script 'schemaStrip.pl'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-account-kconf_update.upd' for new updates
+2006-10-10T10:51:37 kopete-account-kconf_update.upd: Found new update 'kopete0.7/r1'
+2006-10-10T10:51:37 kopete-account-kconf_update.upd: Running script 'kopete-account-kconf_update.sh'
+2006-10-10T10:51:37 kopete-account-kconf_update.upd: Found new update 'kopete0.10/r1'
+2006-10-10T10:51:37 kopete-account-kconf_update.upd: Running script 'kopete-account-0.10.pl'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-jabberpriorityaddition-kconf_update.upd' for new updates
+2006-10-10T10:51:37 kopete-jabberpriorityaddition-kconf_update.upd: Found new update 'kopete0.9/r1'
+2006-10-10T10:51:37 kopete-jabberpriorityaddition-kconf_update.upd: Running script 'kopete-jabberpriorityaddition-kconf_update.sh'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-jabberproxytype-kconf_update.upd' for new updates
+2006-10-10T10:51:37 kopete-jabberproxytype-kconf_update.upd: Found new update 'kopete0.9/r1'
+2006-10-10T10:51:37 kopete-jabberproxytype-kconf_update.upd: Running script 'kopete-jabberproxytype-kconf_update.sh'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-nameTracking.upd' for new updates
+2006-10-10T10:51:37 kopete-nameTracking.upd: Found new update 'kopete0.9/r1'
+2006-10-10T10:51:37 kopete-nameTracking.upd: Running script 'kopete-nameTracking-kconf_update'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-pluginloader.upd' for new updates
+2006-10-10T10:51:37 kopete-pluginloader.upd: Found new update 'kopete0.7/r1'
+2006-10-10T10:51:37 kopete-pluginloader.upd: Running script 'kopete-pluginloader.pl'
+2006-10-10T10:51:37 kopete-pluginloader.upd: Script removes kopeterc::Modules
+2006-10-10T10:51:37 kopete-pluginloader.upd: Removing empty group kopeterc:
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kopete-pluginloader2.upd' for new updates
+2006-10-10T10:51:37 kopete-pluginloader2.upd: Found new update 'kopete0.8/r1'
+2006-10-10T10:51:37 kopete-pluginloader2.upd: Running script 'kopete-pluginloader2.sh'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/korganizer.upd' for new updates
+2006-10-10T10:51:37 korganizer.upd: Found new update 'korganizer_3.4_GroupwareCleanup'
+2006-10-10T10:51:37 korganizer.upd: Found new update 'korganizer_3.4_WebExport'
+2006-10-10T10:51:37 korganizer.upd: Found new update 'korganizer_3.4_FilterAction'
+2006-10-10T10:51:37 korganizer.upd: Found new update 'korganizer_3.4_HolidayPlugin'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/korn-3-4-config_change.upd' for new updates
+2006-10-10T10:51:37 korn-3-4-config_change.upd: Found new update 'korn_kde_3_4_config_change'
+2006-10-10T10:51:37 korn-3-4-config_change.upd: Running script 'korn-3-4-config_change'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/korn-3-5-update.upd' for new updates
+2006-10-10T10:51:37 korn-3-5-update.upd: Found new update 'korn-3-5-ssl-update'
+2006-10-10T10:51:37 korn-3-5-update.upd: Running script 'korn-3-5-ssl-update.pl'
+2006-10-10T10:51:37 korn-3-5-update.upd: Found new update 'korn-3-5-metadata-update'
+2006-10-10T10:51:37 korn-3-5-update.upd: Running script 'korn-3-5-metadata-update.pl'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kpalmdoc.upd' for new updates
+2006-10-10T10:51:37 kpalmdoc.upd: Found new update 'kdepim_3.3'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kpgp.upd' for new updates
+2006-10-10T10:51:37 kpgp.upd: Found new update 'preKDE3_a'
+2006-10-10T10:51:37 kpgp.upd: Found new update '3.1-1'
+2006-10-10T10:51:37 kpgp.upd: Running script 'kpgp-3.1-upgrade-address-data.pl'
+2006-10-10T10:51:37 kpgp.upd: Script removes kpgprc:General:addressKeyEntries
+2006-10-10T10:51:37 kpgp.upd: Script removes kpgprc:General:addressEntries
+2006-10-10T10:51:37 kpgp.upd: Updating kpgprc:General:addressEntries to '0'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kpilot.upd' for new updates
+2006-10-10T10:51:37 kpilot.upd: Found new update 'kdepim_3.3'
+2006-10-10T10:51:37 kpilot.upd: Found new update 'kdepim_3.3_SplitConfig'
+2006-10-10T10:51:37 kpilot.upd: Skipping update 'kdepim_3.3_SplitConfig'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/ksmserver.upd' for new updates
+2006-10-10T10:51:37 ksmserver.upd: Found new update 'kde3'
+2006-10-10T10:51:37 ksmserver.upd: Running script 'move_session_config.sh'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kuriikwsfilter.upd' for new updates
+2006-10-10T10:51:37 kuriikwsfilter.upd: Found new update 'post-kde3.1/cvs'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwin.upd' for new updates
+2006-10-10T10:51:37 kwin.upd: Found new update 'kde3.0r1'
+2006-10-10T10:51:37 kwin.upd: Running script 'pluginlibFix.pl'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:MouseBindings:CommandActiveTitlebar2 to 'Lower'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:MouseBindings:CommandActiveTitlebar3 to 'Operations menu'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Style:PluginLib to 'kwin3_plastik'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:AltTabStyle to 'KDE'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:AnimateMinimize to 'false'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:AnimateShade to 'false'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:FocusPolicy to 'ClickToFocus'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:MoveMode to 'Transparent'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:MoveResizeMaximizedWindows to 'false'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:ResizeMode to 'Transparent'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:ShadeHover to 'false'
+2006-10-10T10:51:37 kwin.upd: Updating kwinrc:Windows:TitlebarDoubleClickCommand to 'Shade'
+2006-10-10T10:51:37 kwin.upd: Found new update 'kde3.2Xinerama'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwin3_plugin.upd' for new updates
+2006-10-10T10:51:37 kwin3_plugin.upd: Found new update 'kde3.2'
+2006-10-10T10:51:37 kwin3_plugin.upd: Running script 'kwin3_plugin.pl'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:MouseBindings:CommandActiveTitlebar2 to 'Lower'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:MouseBindings:CommandActiveTitlebar3 to 'Operations menu'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Style:PluginLib to 'kwin3_plastik'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:AltTabStyle to 'KDE'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:AnimateMinimize to 'false'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:AnimateShade to 'false'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:FocusPolicy to 'ClickToFocus'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:MoveMode to 'Transparent'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:MoveResizeMaximizedWindows to 'false'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:ResizeMode to 'Transparent'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:ShadeHover to 'false'
+2006-10-10T10:51:37 kwin3_plugin.upd: Updating kwinrc:Windows:TitlebarDoubleClickCommand to 'Shade'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwin_focus1.upd' for new updates
+2006-10-10T10:51:37 kwin_focus1.upd: Found new update 'kwin_focus1'
+2006-10-10T10:51:37 kwin_focus1.upd: Running script 'kwin_focus1.sh'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:AltTabStyle to 'KDE'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:AnimateMinimize to 'false'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:AnimateShade to 'false'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:FocusPolicy to 'ClickToFocus'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:IgnoreFocusStealingClasses to 'kio_uiserver'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:MoveMode to 'Transparent'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:MoveResizeMaximizedWindows to 'false'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:ResizeMode to 'Transparent'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:ShadeHover to 'false'
+2006-10-10T10:51:37 kwin_focus1.upd: Updating kwinrc:Windows:TitlebarDoubleClickCommand to 'Shade'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwin_focus2.upd' for new updates
+2006-10-10T10:51:37 kwin_focus2.upd: Found new update 'kwin_focus2'
+2006-10-10T10:51:37 kwin_focus2.upd: Running script 'kwin_focus2.sh'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:AltTabStyle to 'KDE'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:AnimateMinimize to 'false'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:AnimateShade to 'false'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:FocusPolicy to 'ClickToFocus'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:IgnoreFocusStealingClasses to 'kio_uiserver'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:MoveMode to 'Transparent'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:MoveResizeMaximizedWindows to 'false'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:ResizeMode to 'Transparent'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:ShadeHover to 'false'
+2006-10-10T10:51:37 kwin_focus2.upd: Updating kwinrc:Windows:TitlebarDoubleClickCommand to 'Shade'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwin_fsp_workarounds_1.upd' for new updates
+2006-10-10T10:51:37 kwin_fsp_workarounds_1.upd: Found new update 'kde351'
+2006-10-10T10:51:37 kwin_fsp_workarounds_1.upd: Running script 'kwin_update_default_rules' with arguments 'fsp_workarounds_1'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwiniconify.upd' for new updates
+2006-10-10T10:51:37 kwiniconify.upd: Found new update 'iconifyupd3.1'
+2006-10-10T10:51:37 kwiniconify.upd: Updating kwin.eventsrc:minimize:presentation to '0'
+2006-10-10T10:51:37 kwiniconify.upd: Removing kwin.eventsrc:iconify:presentation, moved.
+2006-10-10T10:51:37 kwiniconify.upd: Updating kwin.eventsrc:unminimize:presentation to '0'
+2006-10-10T10:51:37 kwiniconify.upd: Removing kwin.eventsrc:deiconify:presentation, moved.
+2006-10-10T10:51:37 kwiniconify.upd: RemoveGroup removes group kwin.eventsrc:iconify
+2006-10-10T10:51:37 kwiniconify.upd: RemoveGroup removes group kwin.eventsrc:deiconify
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwinsticky.upd' for new updates
+2006-10-10T10:51:37 kwinsticky.upd: Found new update 'stickyupd3.1'
+2006-10-10T10:51:37 kwinsticky.upd: Updating kwin.eventsrc:on_all_desktops:presentation to '0'
+2006-10-10T10:51:37 kwinsticky.upd: Removing kwin.eventsrc:sticky:presentation, moved.
+2006-10-10T10:51:37 kwinsticky.upd: Updating kwin.eventsrc:not_on_all_desktops:presentation to '0'
+2006-10-10T10:51:37 kwinsticky.upd: Removing kwin.eventsrc:unsticky:presentation, moved.
+2006-10-10T10:51:37 kwinsticky.upd: RemoveGroup removes group kwin.eventsrc:sticky
+2006-10-10T10:51:37 kwinsticky.upd: RemoveGroup removes group kwin.eventsrc:unsticky
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/kwinupdatewindowsettings.upd' for new updates
+2006-10-10T10:51:37 kwinupdatewindowsettings.upd: Found new update 'kde33b1'
+2006-10-10T10:51:37 kwinupdatewindowsettings.upd: Running script 'kwin_update_window_settings'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/mouse_cursor_theme.upd' for new updates
+2006-10-10T10:51:37 mouse_cursor_theme.upd: Found new update 'kde3.4.99'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/noatun.upd' for new updates
+2006-10-10T10:51:37 noatun.upd: Found new update 'noatun20'
+2006-10-10T10:51:37 noatun.upd: Running script 'noatun20update'
+2006-10-10T10:51:37 Checking update-file '/opt/kde/share/apps/kconf_update/socks.upd' for new updates
+2006-10-10T10:51:37 socks.upd: Found new update 'kde3.0/r1'

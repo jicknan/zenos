@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment=kde X-terminal
+Comment[en_US]=kde X-terminal
+Encoding=UTF-8
+Exec=konsole
+GenericName=
+GenericName[en_US]=
+Icon=konsole
+MimeType=
+Name=Konsole
+Path=
+StartupNotify=false
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DCOP-ServiceType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

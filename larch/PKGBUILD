@@ -1,0 +1,30 @@
+# Maintainer: Michael Towers <gradgrind[at]online[dot]de>
+# 2008.05.16
+pkgname=larch
+pkgver=5.3.2
+pkgrel=2
+
+# If I need the architecture, I can get it as ${CARCH}
+
+pkgdesc="Scripts for generating live Archlinux CDs and USB-sticks"
+url="http://larch.berlios.de"
+depends=()
+arch=(i686 x86_64)
+license=('GPL')
+install=${pkgname}.install
+
+build() {
+  mkdir -p ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/run ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/cd-root ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/docs ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/profile0 ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/profiles ${startdir}/pkg/opt/larch
+  cp -dr ${startdir}/etc ${startdir}/pkg
+  cp ${startdir}/buildlive ${startdir}/pkg/opt/larch
+
+  mkdir -p ${startdir}/pkg/usr/share/pixmaps
+  cp ${startdir}/larch.png ${startdir}/pkg/usr/share/pixmaps
+  mkdir -p ${startdir}/pkg/usr/share/applications
+  cp ${startdir}/larchdoc.desktop ${startdir}/pkg/usr/share/applications
+}

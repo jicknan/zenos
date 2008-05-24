@@ -1,0 +1,18 @@
+#
+# patch file for /etc/rc.conf
+#
+
+LOCALE="en_US.utf8"
+HARDWARECLOCK="UTC"
+TIMEZONE="Europe/Berlin"
+KEYMAP="de-latin1-nodeadkeys"
+
+MODULES=()
+
+HOSTNAME="mylivehost"
+
+USELVM="yes"
+
+eth0="dhcp"
+
+DAEMONS=(syslog-ng network sshd)

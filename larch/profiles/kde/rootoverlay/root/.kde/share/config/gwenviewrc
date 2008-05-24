@@ -1,0 +1,5 @@
+[$Version]
+update_info=gwenview_1.4_osdformat.upd:osdformat,gwenview_thumbnail_size.upd:gwenview_thumbnail_size
+
+[pixmap widget]
+osdFormat=

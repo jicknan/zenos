@@ -1,0 +1,16 @@
+post_install() {
+  echo "WARNING: The larch init system has changed again in larch-5.3."
+  echo "By using new function-based versions of /etc/rc.sysinit and /etc/rc.shutdown"
+  echo "it is no longer necessary to change '/etc/inittab', though your"
+  echo "profile may do this for its own reasons."
+  echo "The original /etc/inittab is still saved to /etc/inittab.larchsave, so that"
+  echo "the hard disk installer can restore it."
+  echo "Until function-based versions of /etc/rc.sysinit and /etc/rc.shutdown"
+  echo "are adopted by Arch Linux officially, a customized 'initscripts' package"
+  echo "must be used for larch."
+  bin/true
+}
+
+op=$1
+shift
+$op $*

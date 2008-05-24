@@ -1,0 +1,31 @@
+# These are needed to build a live CD
+larch-live
+squashfs-tools
+lzop
+
+syslinux
+
+# You need a kernel.
+#kernel26 is now in 'base'
+aufs
+
+# To eject a cd
+eject
+
+# Useful for use as installer, etc.
+ntfsprogs
+parted
+#ddcxinfo-knoppix
+#hwd
+
+# generally useful tools which don't require X
+openssh
+dosfstools
+lynx
+mc-utf8
+unzip
+zip
+
+lsof
+#cdrkit
+#dvd+rw-tools
