@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Application;System;Utility
+Encoding=UTF-8
+Exec=xkmap.py
+Icon=xkmap
+StartupNotify=true
+Terminal=false
+Type=Application
+Name=Set Keyboard Map
+Comment=

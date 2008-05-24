@@ -1,0 +1,13 @@
+post_install() {
+  echo "==> Edit your /etc/slim.conf and change the current_theme to dlarch:"
+  echo "==> current_theme       dlarch"
+}
+
+post_remove() {
+  echo "==> Edit your /etc/slim.conf and change the current_theme for"
+  echo "==> a another theme than dlarch"
+}
+
+op=$1
+shift
+$op $*

@@ -1,0 +1,22 @@
+# Contributor: Michael Towers <gradgrind[at]online[dot]de>
+
+pkgname=xkmap
+pkgver=2.1
+pkgrel=2
+pkgdesc="A keymap setter for xorg: a simple graphical front-end for setxkbmap"
+license=('GPL')
+arch=(i686 x86_64)
+depends=('pygtk' 'python-pexpect')
+url="http://larch.berlios.de"
+source=(xkmap.py xkmap-set xkmap.png xkmap.desktop)
+build() {
+  cd $startdir/pkg
+  mkdir -p usr/bin
+  mkdir -p usr/share/pixmaps
+  mkdir -p usr/share/applications
+
+  cp $startdir/src/xkmap.py usr/bin
+  cp $startdir/src/xkmap-set usr/bin
+  cp $startdir/src/xkmap.png usr/share/pixmaps
+  cp $startdir/src/xkmap.desktop usr/share/applications
+}

@@ -1,0 +1,25 @@
+# Modified version of slim-theme-darch (Gleidson Echeli <gleidson.echeli@gmail.com>)
+# Modified colours for larch by gradgrind.
+
+pkgname=slim-theme-dlarch
+pkgver=1.0
+pkgrel=2
+pkgdesc="Slim theme for ArchLinux/larch"
+license=('custom')
+arch=('i686' 'x86_64')
+url="http://larch.berlios.de"
+depends=('slim')
+install=dlarch.install
+
+build() {
+  cd $startdir/dlarch
+  
+  install -m 644 -D background.png $startdir/pkg/usr/share/slim/themes/dlarch/background.png
+  install -m 644 -D panel.png $startdir/pkg/usr/share/slim/themes/dlarch/panel.png
+  install -m 644 -D slim.theme $startdir/pkg/usr/share/slim/themes/dlarch/slim.theme
+  install -m 644 -D preview.png $startdir/pkg/usr/share/slim/themes/dlarch/preview.png
+
+  # Install the license.
+  install -m 755 -d $startdir/pkg/usr/share/licenses/slim-theme-dlarch
+  install -m 644 -D LICENSE.txt $startdir/pkg/usr/share/licenses/slim-theme-dlarch/
+}

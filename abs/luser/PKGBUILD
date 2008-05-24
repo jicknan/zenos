@@ -1,0 +1,21 @@
+# Contributor: Michael Towers <gradgrind[at]online[dot]de>
+
+pkgname=luser
+pkgver=1.0
+pkgrel=1
+pkgdesc="A simple graphical front-end for user/group management"
+license=('GPL')
+arch=(i686 x86_64)
+depends=('pygtk' 'python-pexpect')
+url="http://larch.berlios.de"
+source=(luser.py luser.png luser.desktop)
+build() {
+  cd $startdir/pkg
+  mkdir -p usr/bin
+  mkdir -p usr/share/pixmaps
+  mkdir -p usr/share/applications
+
+  cp $startdir/src/luser.py usr/bin
+  cp $startdir/src/luser.png usr/share/pixmaps
+  cp $startdir/src/luser.desktop usr/share/applications
+}
