@@ -1,0 +1,120 @@
+# vim: set ft=sh:
+
+# larch1 -  live 'hook' for mkinitcpio: set up tmpfs and find boot device
+
+# Author: Michael Towers (gradgrind) <mt.42@web.de>
+#
+# This file is part of the larch project.
+#
+#    larch is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    larch is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with larch; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#----------------------------------------------------------------------------
+#2008.02.11
+
+# Replacement for msg which includes leading and trailing spaces
+msg_ () { [ "${quiet}" != "y" ] && echo "$@"; }
+
+# Try to mount a disk, partition or cdrom and look for the file
+# 'larchboot' in the /larch directory.
+# If LiveCD system found in the device, return 0, else return 1
+# and leave the device mounted.
+# $1 = device name (e.g. "/dev/hda2")
+# $2 = directory where devices will be mounted
+#
+test_live_data_dir ()
+{
+    /bin/mount -r -t iso9660 "$1" $2 >/dev/null 2>/dev/null || \
+    /bin/mount -r -t vfat -o noatime,nodiratime "$1" $2 >/dev/null 2>/dev/null || \
+    /bin/mount -r -t ext2 -o noatime,nodiratime "$1" $2 >/dev/null 2>/dev/null
+    if [ $? -eq 0 ]; then
+        if [ -f "$2/larch/larchboot" ]; then
+            LDEV="$1"
+            msg_ " ... found at $1"
+            return 0
+        else
+            /bin/umount $2 2>/dev/null
+            msg_ " ... $1 mounted, but no 'larch/larchboot' found"
+        fi
+    else
+        msg_ "  ... not $1"
+    fi
+    return 1
+}
+
+run_hook ()
+{
+    msg_ ":: Creating writeable filesystem (tmpfs)"
+    /bin/mkdir "/tfs"
+    # Boot option copy-to-ram (c2r)
+    if [ "${c2r}" = "y" ]; then
+        TFSSIZE="90%"
+    else
+        TFSSIZE="60%"
+    fi
+    /bin/mount -t tmpfs -o "size=${TFSSIZE}" tmpfs "/tfs"
+
+    # Directory for test mounts (and then for live CD)
+    cdmount="/livecd"
+    /bin/mkdir "${cdmount}"
+
+    # look for livecd data directory, first try ${root}
+    LDEV="${root}"
+    if [ "x${LDEV}" != "x" ]; then
+        /bin/mount -r -t iso9660 "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null || \
+        /bin/mount -r -t vfat -o noatime,nodiratime "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null || \
+        /bin/mount -r -t ext2 -o noatime,nodiratime "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null
+        if [ $? -eq 0 ]; then
+            if [ -d "${cdmount}/larch" ]; then
+                msg_ ":: larch system at ${LDEV}"
+            else
+                /bin/umount "${cdmount}" 2>/dev/null
+                echo "!! No larch system at ${LDEV}"
+                LDEV=""
+            fi
+        else
+            echo "!! Couldn't mount ${LDEV}"
+            LDEV=""
+        fi
+    fi
+
+    # then try cdroms
+    if [ "x${LDEV}" = "x" ]; then
+        msg_ ":: Looking for boot device"
+        cdroms=$( /bin/cat /proc/sys/dev/cdrom/info | { while read a b c; do
+                if [ "${a}" = "drive" -a "${b}" = "name:" ]; then
+                    echo "${c}"
+                    break
+                fi
+            done
+        } )
+        for i in ${cdroms}; do
+            test_live_data_dir "/dev/${i}" "${cdmount}"
+            if [ $? -eq 0 ]; then break; fi
+        done
+    fi
+
+    # test USB devices (and disks) repeatedly until timed out
+    if [ "x${LDEV}" = "x" ]; then
+        msg_ ":: Searching for usb (and disk) devices .."
+        for i in 1 2 3 4 5; do
+            msg_ " :wait ${i} :::"
+            /bin/sleep ${i}
+            for d in /dev/sd[a-z][0-9]*; do
+                test_live_data_dir "${d}" "${cdmount}"
+                if [ $? -eq 0 ]; then break 2; fi
+            done
+        done
+    fi
+}

@@ -1,0 +1,15 @@
+install ()
+{
+    MODULES="vfat isofs ext2 ext3 nls_cp437"
+    BINARIES=""
+    FILES=""
+    SCRIPT="larch1"
+}
+
+help ()
+{
+cat<<HELPEOF
+  This hook deals with booting a larch live CD. It is the first larch hook,
+creating a tmpfs and seeking the boot medium.
+HELPEOF
+}

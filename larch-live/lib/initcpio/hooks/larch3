@@ -1,0 +1,190 @@
+# larch3 -  live 'hook' for mkinitcpio:
+#                 deal with c2r,
+#                 mount base system,
+#                 load overlay,
+#                 set up unioned root filesystem.
+#                 Also manages overlay merging.
+
+# Author: Michael Towers <gradgrind[at]online[dot]de>
+#
+# This file is part of the larch project.
+#
+#    larch is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    larch is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with larch; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#----------------------------------------------------------------------------
+# 2008.04.04
+
+run_hook ()
+{
+    if [ "x${LDEV}" = "x" ]; then
+        err "Sorry, couldn't find boot medium ..."
+        break="y"
+        return
+    fi
+
+    # Path to compressed base system
+    sysSqf=${cdmount}/system.sqf
+
+    ovlpath=${cdmount}
+
+    # A possibility to use alternative files:
+    if [ -f ${cdmount}/larch/boot-init ]; then
+        . ${cdmount}/larch/boot-init
+    fi
+
+    # Path to compressed 'modifications' archive
+    modsSqf=${ovlpath}/mods.sqf
+    # Default overlay file and directory
+    overlay=${ovlpath}/overlay.ovl
+
+    # Make union root
+    /bin/mkdir /union
+
+    # Deal with new archives
+    if [ -f ${overlay}_ ]; then
+        /bin/mount -o remount,rw ${LDEV} ${cdmount}
+        /bin/mv ${overlay} ${overlay}~
+        /bin/mv ${overlay}_ ${overlay}
+
+        if [ -f ${modsSqf}_ ]; then
+            /bin/mv ${modsSqf} ${modsSqf}~
+            /bin/mv ${modsSqf}_ ${modsSqf}
+        fi
+        /bin/mount -o remount,ro ${LDEV} ${cdmount}
+    fi
+
+    # Boot option copy-to-ram (c2r)
+    if [ "${c2r}" = "y" ]; then
+        msg_ ":: Copying base system to RAM, this will take a while ..."
+        /bin/cat ${sysSqf} > /tfs/system.sqf
+        if [ $? -ne 0 ]; then
+            err "Sorry, not enough RAM"
+            break="y"
+            return
+        fi
+        sysSqf=/tfs/system.sqf
+
+        msg_ ":: Copying mods archive to RAM, this might take a while ..."
+        /bin/cat ${modsSqf} > /tfs/mods.sqf
+        if [ $? -ne 0 ]; then
+            err "Sorry, not enough RAM"
+            break="y"
+            return
+        fi
+        modsSqf=/tfs/mods.sqf
+
+        # force use of swap (if available)
+        :> /tfs/swapon
+
+    elif [ "${swap}" = "y" ]; then
+        :> /tfs/swapon
+    fi
+
+    msg_ ":: Mounting squashed images"
+    /bin/mkdir /tfs/system
+    # The klibc mount command doesn't support '-o loop'
+    /bin/losetup /dev/loop0 ${sysSqf}
+    /bin/mount -r -t squashfs /dev/loop0 /tfs/system
+
+    # Make stuff in 'system' available by providing the loader and
+    # library path
+    ldli=$( cd /tfs/system; echo lib/ld-linux*.so.2 )
+    /bin/ln -s /tfs/system/${ldli} /${ldli}
+    export LD_LIBRARY_PATH=/tfs/system/lib:/tfs/system/usr/lib
+
+    /bin/mkdir /tfs/mods
+    # The klibc mount command doesn't support '-o loop'
+    /bin/losetup /dev/loop1 ${modsSqf}
+    /bin/mount -r -t squashfs /dev/loop1 /tfs/mods
+
+    # Unpack the overlay
+    msg_ ":: Initializing writable layer for union (overlay)"
+    /tfs/system/usr/bin/lzop -d < ${overlay} | \
+            /tfs/system/bin/tar -C /tfs -xf -
+
+    # Copy the installation tidy-up script (for removing custom live-only stuff),
+    # and any other files in 'larch/copy' directory
+    if [ -d ${ovlpath}/larch/copy ]; then
+        cd ${ovlpath}/larch/copy
+        for f in *; do
+            cat ${f} >/tfs/${f}
+        done
+    fi
+
+    msg_ ":: Setting up union file system"
+
+    layers="/tfs/overlay=rw:/tfs/mods=${ovlmnt}:/tfs/system=${sqfmnt}"
+    /bin/mount -t ${utype} -o ${bropt}${layers} ${utype} /union
+
+    echo "${utype}" > /tfs/utype
+
+    # Minimal device nodes needed before udev does its work
+    /bin/mkdir /union/dev
+    /bin/mknod /union/dev/console c 5 1
+    /bin/mknod /union/dev/null c 1 3
+    /bin/mknod /union/dev/zero c 1 5
+
+    # Make special directories
+    /bin/mkdir -m 1777 /union/tmp
+    /bin/mkdir /union/media
+    /bin/mkdir /union/sys
+    /bin/mkdir /union/proc
+
+    # Make the tmpfs stuff accessible within the union
+    /bin/mkdir /union/.livesys
+    /bin/mount -o bind /tfs /union/.livesys
+
+    /bin/mkdir /union/.livesys/medium
+
+    /bin/mount -o bind /tfs/system /union/.livesys/system
+    /bin/mount -o bind /tfs/overlay /union/.livesys/overlay
+    /bin/mount -o bind ${cdmount} /union/.livesys/medium
+
+    if [ "x${modsSqf}" != "x" ]; then
+        /bin/mount -o move /tfs/mods /union/.livesys/mods
+    fi
+
+    # Remember the boot device
+    echo "${LDEV}" > /tfs/bootdevice
+
+    if [ "${c2r}" = "y" ]; then
+        # Set flag to inform system of copy-to-ram
+        :> /tfs/c2r
+
+        # Unmount boot device
+        /bin/umount ${cdmount}
+    fi
+
+    msg_ ":: End of live system set-up"
+
+    # Now some tweaks to alter 'init' actions from non-larch hooks, etc.
+    # Override rootdelay from usb hook
+    if [ "x${larchdelay}" = "x"  ]; then
+        # To avoid spurious udevd pid numbers
+        export rootdelay=1
+    else
+        # Allow adjustment via boot option
+        export rootdelay=${larchdelay}
+    fi
+    # root must be set to something or other, even though larch doesn't
+    # need it ...
+    export root="/dev/loop0"
+}
+
+#######
+# The actual root switch occurs later, when 'init' execs 'kinit'.
+# I handle this by overwriting the 'kinit' binary with my own script.
+# This will unmount dev, sys and proc and then exec run-init.
+#######

@@ -1,0 +1,12 @@
+#! /bin/bash
+
+# gen_larch_init
+#
+# Author: Michael Towers <gradgrind[at]online[dot]de>
+
+# Create an initramfs for a larch live system
+#  $1  - kernel version
+
+# The cpio.gz image is generated in larch.img
+
+/sbin/mkinitcpio -c /lib/initcpio/mkinitcpio.conf -k $1 -g larch.img

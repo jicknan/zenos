@@ -1,0 +1,6 @@
+#! /bin/sh
+
+umount /sys
+umount /proc
+umount /dev
+exec run-init -c /dev/console /union /sbin/init ${CMDLINE}

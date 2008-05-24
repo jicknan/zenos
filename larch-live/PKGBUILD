@@ -1,0 +1,19 @@
+# Maintainer: Michael Towers <gradgrind[at]online[dot]de>
+# 2008.05.24
+pkgname=larch-live
+pkgver=5.3.3
+pkgrel=1
+
+pkgdesc="larch: compulsory components for the live system"
+url="http://larch.berlios.de"
+depends=()
+arch=(i686 x86_64)
+license=('GPL')
+
+build() {
+  mkdir -p ${startdir}/pkg/opt/larch-live
+  cp -dr ${startdir}/run ${startdir}/pkg/opt/larch-live
+  cp -dr ${startdir}/session-save ${startdir}/pkg/opt/larch-live
+  cp -dr ${startdir}/etc ${startdir}/pkg
+  cp -dr ${startdir}/lib ${startdir}/pkg
+}

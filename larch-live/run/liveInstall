@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# liveInstall   - install 'live' system to partition
+
+# default partition is sda1
+if [ -n "$1" ]; then
+    part="$1"
+else
+    part="sda1"
+fi
+
+echo "The partition (/dev/${part}) should be freshly formatted, e.g.:"
+echo "mke2fs /dev/${part}"
+read -p "Continue? [y/N]: " ans
+if [ -z "$( echo ${ans} | grep '^ *[yY]' )" ]; then exit 0; fi
+
+
+if [ -n "$( df | grep "/dev/${part} " )" ]; then
+    umount /dev/${part}
+fi
+
+mp="/mnt/gp_${part}"
+mkdir -p ${mp}
+mount /dev/${part} ${mp}
+if [ $? -ne 0 ]; then
+    echo "Mount failure"
+    exit 1
+fi
+
+# Boot device mounted at:   /.livesys/livecd
+cp -a /.livesys/livecd/* ${mp}
+
+if [ -d ${mp}/isolinux ]; then
+    mv ${mp}/isolinux ${mp}/boot
+    rm ${mp}/boot/isolinux*
+    rm ${mp}/boot/*.jpg
+    rm ${mp}/boot/*menu*
+fi
+
+grub-install --root-directory=${mp} --no-floppy "(hd0)"
+cp -f /boot/grub/menu.lst ${mp}/boot/grub
+
+mkinitcpio -g ${mp}/boot/larch.img
+
+umount ${mp}

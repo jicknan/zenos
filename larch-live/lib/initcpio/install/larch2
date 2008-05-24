@@ -1,0 +1,15 @@
+install ()
+{
+    MODULES="unionfs"
+    BINARIES=""
+    FILES=""
+    SCRIPT="larch2"
+}
+
+help ()
+{
+cat<<HELPEOF
+  This hook deals with booting a larch live CD. It handles selection of the
+desired unioning file system, here unionfs.
+HELPEOF
+}

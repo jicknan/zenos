@@ -1,0 +1,18 @@
+install ()
+{
+    MODULES="squashfs reiserfs"
+    BINARIES=""
+    FILES=""
+    SCRIPT="larch3"
+#    add_file "/lib/initcpio/kinit" "/bin/kinit"  ##### This doesn't work, so:
+    sed -i 's|.*/usr/lib/klibc/bin/kinit\.shared.*||' "${FILELIST}"
+    sed -i 's|/usr/lib/klibc/bin/kinit|/lib/initcpio/kinit|' "${FILELIST}"
+}
+
+help ()
+{
+cat<<HELPEOF
+  This hook deals with booting a larch live CD. It is the last larch hook,
+setting up the tmpfs root file system.
+HELPEOF
+}
