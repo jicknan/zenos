@@ -1,0 +1,80 @@
+#! /bin/bash
+#
+# mklarchrepo
+#
+# Author: Michael Towers <gradgrind[at]online[dot]de>
+#
+# This file is part of the larch project.
+#
+#    larch is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    larch is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with larch; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#----------------------------------------------------------------------------
+# 2008.02.27
+
+# This script should be run in place to create/update a repository for larch5.
+
+# The default is 'larchrepo' in the current directory, which can be a symlink
+repodir="$( readlink -f larchrepo )"
+if [ -n "$1" ]; then
+    repopath="$( readlink -f $1 )"
+    d="$( dirname ${repopath} )"
+    if [ -d ${d} ]; then
+        repodir="${repopath}"
+    else
+        echo "ERROR: No directory <${d}>"
+        exit 1
+    fi
+fi
+mkdir -p ${repodir}
+
+# Get path to this directory, via the location of this script
+fullpath="$( readlink -f $0 )"
+scriptdir="$( dirname ${fullpath} )"
+
+# makepkg needs '--asroot' if used by root
+if [ $UID -ne 0 ]; then
+    asroot=""
+    fkroot="fakeroot"
+else
+    asroot="--asroot"
+    fkroot=""
+fi
+
+mkpkg ()
+{
+    # get new package version from PKGBUILD
+    . PKGBUILD
+    if ! [ -f ${repodir}/${pkgname}-${pkgver}-${pkgrel}*.pkg.tar.gz ]; then
+        for p in $( ls ${repodir} | egrep "^${pkgname}-[0-9]+" ); do
+            rm ${repodir}/${p}
+        done
+        makepkg -d ${asroot}
+        mv ${pkgname}-*.pkg.tar.gz ${repodir}
+    fi
+}
+
+for ad in larch larch-live larchin-syscalls larchin; do
+    ( cd ${scriptdir}/${ad}; mkpkg )
+done
+
+for ad in $( ls ${scriptdir}/abs ); do
+    if [ -f ${scriptdir}/abs/${ad}/PKGBUILD ]; then
+        ( cd ${scriptdir}/abs/${ad}; mkpkg )
+    fi
+done
+
+${fkroot} ${scriptdir}/larch/run/gen_repo ${repodir} larch5
+
+echo "Repository at ${repodir} created/updated."
