@@ -1,5 +1,5 @@
 pkgname=aufs
-pkgver=20080524
+pkgver=20080527
 pkgrel=1
 _kernver='2.6.25-ARCH'
 pkgdesc="Another Unionfs Implementation that supports NFS branches"
@@ -27,13 +27,15 @@ build() {
 
   # use splice functions exported by unionfs kernel patch
   #  - important for loopback fs mounts
-  sed s'|do_splice_to|vfs_splice_to|' -i fs/aufs25/vfsub.c
-  sed s'|do_splice_from|vfs_splice_from|' -i fs/aufs25/vfsub.c
+  sed s'|#if.*KERNEL_VERSION(2, 6, 26).*|#if 0|' -i fs/aufs25/vfsub.h
   sed -i 's|CONFIG_AUFS_SPLICE_PATCH =|CONFIG_AUFS_SPLICE_PATCH = y|' \
-    local.mk || return 1
+      local.mk || return 1
+
+  # patch for spin_lock conflict with the new unionfs patch
+  sed s'|#if.*KERNEL_VERSION(2, 6, 26).*|#if 0|' -i fs/aufs25/cpup.c
 
   sed -i 's|.*CONFIG_AUFS_SHWH =.*|CONFIG_AUFS_SHWH = y|' \
-    local.mk || return 1
+      local.mk || return 1
 
   # configure for NFS by:
   # 1) configure local.mk to use FILP and LHASH
