@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.05.15
+# 2008.05.27
 
 
 # directory to use for building the CD - the installation root
@@ -29,7 +29,7 @@
 INSTLDIR=/home/larchroot
 
 # Default path to larch5 repositories (architecture is sub-directory)
-larch5path="ftp://ftp.berlios.de/pub/larch/larch5"
+larch5path="ftp://ftp.berlios.de/pub/larch/larch5.3"
 
 APP=$( basename $0 )
 # Get path to larch base directory, via the location of this script
