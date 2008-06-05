@@ -15,6 +15,13 @@ fi
 # slim is currently started in inittab
 #sed -i '/^DAEMONS=/ s|!slim|@slim|' ${INSTALL}/etc/rc.conf
 
+# Copy xorg.conf.i810 to target xorg.conf if necessary
+if ! [ -f /etc/X11/xorg.conf ]; then
+    if grep i810 /proc/cmdline &>/dev/null; then
+        cp /etc/X11/xorg.conf.i810 ${INSTALL}/etc/X11/xorg.conf
+    fi
+fi
+
 #***************************************************#
 # Replace uses of larchquit in xfce panels and menu.#
 #***************************************************#
