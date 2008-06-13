@@ -1,3 +1,11 @@
+2008.06.07
+Version 5.3.4
+Removed warnings about kconfig (as this is no longer included in Arch kernels.
+Added check for mkisofs on host at beginning of buildlive (if building iso).
+Added check for syslinux on target at beginning of buildlive (if not using
+GRUB).
+Minor profile tweaks.
+
 2008.05.15
 Version 5.3.2, adjusted initscripts approach so that it doesn't require a
 custom initscripts package. Now rc.sysinit and rc.shutdown are replaced (in
@@ -18,9 +26,9 @@ listed in the 'noupdate' file in the profile, will also be added. This
 line will be removed on installation using larchin.
 
 2008.04.27
-Version 5.3.0, new initscripts approach, replacing functions in /etc/rc.d/functions
-rather than replacing /etc/rc.sysinit and /etc/rc.shutdown. At present this
-requires a custom initscripts package.
+Version 5.3.0, new initscripts approach, replacing functions in
+/etc/rc.d/functions rather than replacing /etc/rc.sysinit and
+/etc/rc.shutdown. At present this requires a custom initscripts package.
 
 2008.04.21
 Version 5.2.2, added usb2iso, a fairly primitive script to make an iso from

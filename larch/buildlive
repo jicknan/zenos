@@ -19,7 +19,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.05.16
+# 2008.06.07
 
 # Location for the CD image
 CDDATA="${LARCHBUILD}/cd"
@@ -88,13 +88,23 @@ mklive ()
         fail=1
     fi
 
-    for p in "larch-live" "lzop" "tar" "squashfs-tools"; do
+    mustpacs="larch-live lzop tar squashfs-tools"
+    if [ -z "${GRUB}" ]; then
+        mustpacs="${mustpacs} syslinux"
+    fi
+    for p in ${mustpacs}; do
         pac=$( ls ${INSTLDIR}/var/lib/pacman/local | egrep "^${p}-[^-]+-[^-]+$" )
         if [ -z "${pac}" ]; then
             echo "ERROR: Package ${p} is not installed on target"
             fail=1
         fi
     done
+
+    if [ -z "${USB}" ] && ! which mkisofs &>/dev/null; then
+        echo "ERROR: mkisofs not found -"
+        echo "      cdrkit (or cdrtools) must be installed on host"
+        fail=1
+    fi
 
     if [ ${fail} -ne 0 ]; then
         return 1
@@ -128,16 +138,6 @@ mklive ()
     echo "// copying kernel from ${INSTLDIR}/boot to ${CDDATA}/boot/vmlinuz"
     echo "//  ... using ${VMLINUZ}"
     cp -f ${INSTLDIR}/boot/${VMLINUZ} ${CDDATA}/boot/vmlinuz
-
-    # kernel config - try substituting 'kconfig' for 'vmlinuz' in ${VMLINUZ}
-    kcn=$( echo ${VMLINUZ} | sed 's|vmlinuz|kconfig|' )
-    if [ -f ${INSTLDIR}/boot/${kcn} ]; then
-        KCONFIG=${kcn}
-        echo "//  ... using ${KCONFIG}"
-        cp -f ${INSTLDIR}/boot/${KCONFIG} ${CDDATA}/boot/kconfig
-    else
-        echo "WARNING: kernel config (${kcn}) not found" 1>&2
-    fi
 
     ### Generate initcpio (using chroot if necessary) then copy it to CDDATA
 
@@ -371,7 +371,7 @@ buildiso ()
     else
         bd=${CDDATA}/isolinux
     fi
-    cp ${bd}/{vmlinuz,kconfig,larch.img} ${CDDATA}/tmp
+    cp ${bd}/{vmlinuz,larch.img} ${CDDATA}/tmp
     rm -rf ${CDDATA}/{isolinux,boot}
     if [ -n "${GRUB}" ]; then
         mv ${CDDATA}/tmp ${CDDATA}/boot
