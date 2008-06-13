@@ -1,9 +1,0 @@
-#!/bin/sh
-
-# get-cylsize
-
-# Get the number of cylinders and the size of a cylinder in kB (roughly!)
-# on device $1
-
-parted -sm $1 unit cyl print | grep 'kB;' | \
-        sed -r 's|^([0-9]+):.*:([0-9]+)kB;$|\1 \2|'

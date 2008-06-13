@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# get-partitions
-
-# Get info on the partitions on the given (argument $1) device using parted.
-# Set unit to 'MB' (10^6 bytes).
-
-parted -sm $1 unit MB print free
