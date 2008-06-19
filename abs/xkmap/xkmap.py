@@ -19,25 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #-------------------------------------------------------------------
-# 2008.04.21
-
-
-### xkmap-set:
-### #!/bin/sh
-### if [ -f ~/.xkmap.conf ]; then
-###     cfile="$( readlink -f ~/.xkmap.conf )"
-### elif [ -f /etc/X11/xinit/xkmap.conf ]; then
-###     cfile="/etc/X11/xinit/xkmap.conf"
-### else
-###     echo "xkmap-set: Error, no settings file found." 1>&2
-###     echo "       (/etc/X11/xinit/xkmap.conf or ~/.xkmap.conf)" 1>&2
-###     exit 1
-### fi
-### read model layout variant <${cfile}
-### if [ "${variant}" = "Standard"]; then
-###     variant = '""'
-### fi
-### setxkbmap -rules xorg -model ${model} -layout ${layout} -variant ${variant}
+# 2008.06.19
 
 # Set this for your system (probably one of these is OK)
 base_lst = "/usr/share/X11/xkb/rules/base.lst"
@@ -406,38 +388,29 @@ class Xkbset:
             return self.allVariants[layout]
 
     def new(self):
-        m = self.model
-        l = self.layout
-        v = self.variant
-        if v == "Standard":
-            v = '""'
-
-        command = ("setxkbmap -rules xorg -model %s -layout %s -variant %s"
-                % (m, l, v))
+        command = ("setxkbmap -rules xorg -model %s -layout %s" %
+                (self.model, self.layout))
+        if self.variant != "Standard":
+            command += " -variant " + self.variant
         os.system(command)
 
         savemode = gui.get_savemode()
         if (savemode == 'user'):
-            configfile = self.configuser
+            f = open(self.configuser, "w")
+            f.write("%s %s %s\n" % (self.model, self.layout, self.variant))
+            f.close()
         elif (savemode == 'all'):
             if os.path.isfile(self.configuser):
                 os.remove(self.configuser)
-            configfile = configall
             if (os.getuid() != 0):
                 cmd = "echo '%s %s %s' >%s" % (self.model,
-                        self.layout, self.variant, configfile)
+                        self.layout, self.variant, configall)
                 gui.rootrun(cmd)
-                return
-        else:
-            return
-        f = open(configfile, "w")
-        f.write("%s %s %s\n" % (self.model, self.layout, self.variant))
-        f.close()
 
         popupMessage(_("Keyboard set to:\n"
                 "  model %s\n"
                 "  layout %s\n"
-                "  variant %s") % (m, l, v))
+                "  variant %s") % (self.model, self.layout, self.variant))
 
 
 class XCombo(gtk.Frame):

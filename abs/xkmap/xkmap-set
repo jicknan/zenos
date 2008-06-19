@@ -7,14 +7,14 @@ if [ -f ~/.xkmap.conf ]; then
 elif [ -f /etc/X11/xinit/xkmap.conf ]; then
     cfile="/etc/X11/xinit/xkmap.conf"
 else
-    echo "xkmap-set: Error, no settings file found." 1>&2
-    echo "       (/etc/X11/xinit/xkmap.conf or ~/.xkmap.conf)" 1>&2
+    echo "xkmap-set: No settings file found (/etc/X11/xinit/xkmap.conf or ~/.xkmap.conf)" 1>&2
+    echo "     Leaving default keyboard layout." 1>&2
     exit 1
 fi
 
 read model layout variant <${cfile}
-if [ "${variant}" = "Standard" ]; then
-    variant = '""'
+if [ "${variant}" != "Standard" ]; then
+    varg="-variant ${variant}"
 fi
 
-setxkbmap -rules xorg -model ${model} -layout ${layout} -variant ${variant}
+setxkbmap -rules xorg -model ${model} -layout ${layout} ${varg}

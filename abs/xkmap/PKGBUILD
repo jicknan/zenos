@@ -1,8 +1,8 @@
 # Contributor: Michael Towers <gradgrind[at]online[dot]de>
 
 pkgname=xkmap
-pkgver=2.1
-pkgrel=2
+pkgver=2.2
+pkgrel=1
 pkgdesc="A keymap setter for xorg: a simple graphical front-end for setxkbmap"
 license=('GPL')
 arch=(i686 x86_64)
