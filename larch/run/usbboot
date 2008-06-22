@@ -2,7 +2,7 @@
 #
 # usbboot
 #
-# Author: Michael Towers (gradgrind) <mt.42@web.de>
+# Author: Michael Towers <gradgrind[at]online[dot]de>
 #
 # This file is part of the larch project.
 #
@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.03.15
+# 2008.06.22
 
 APP="$( basename $0 )"
 
@@ -126,6 +126,7 @@ dd if=${AINSTALL}/usr/lib/syslinux/mbr.bin of=${dev}
 echo "// Copying the files"
 stick=/tmp/mnt
 mkdir -p ${stick}
+umount ${device} &>/dev/null
 mount ${device} ${stick}
 if [ $? != 0 ]; then
   echo "ERROR: Failed to mount device, quitting"

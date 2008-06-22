@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.05.27
+# 2008.06.22
 
 
 # directory to use for building the CD - the installation root
@@ -119,6 +119,13 @@ do
   esac
 done
 shift $((${OPTIND} - 1))
+if ! [ -d "${PKGCACHE}" ]; then
+    echo "Creating package cache: ${PKGCACHE}"
+    if ! mkdir -p "${PKGCACHE}"; then
+        echo "ERROR: Couldn't create ${PKGCACHE}"
+        exit 1
+    fi
+fi
 INPACSO="${INPACSO} -c ${PKGCACHE}"
 
 if [ -n "$1" ]; then
@@ -209,20 +216,16 @@ fi
 inpacs -a ${PROFILE}/addedpacks ${INPACSO} ${INSTLDIR}
 if [ $? -ne 0 ]; then exit 1; fi
 
-#????
-#echo
-#echo "********** Removing pacman databases **********"
-#echo
-
-## Remove unneeded pacman db info
-#for d in $( ls ${INSTLDIR}/var/lib/pacman ); do
-#    if [ "${d}" != "local" ]; then rm -r ${INSTLDIR}/var/lib/pacman/${d}; fi
-#done
-
 # Use build version of pacman.conf in live system, without [larch5] repository.
 # This can be overwritten by a pacman.conf in the profile's overlay.
-sed '/^\[larch5\]/,/^ *$/ d' -i pacman.conf
-cp -f pacman.conf ${INSTLDIR}/etc
+rm -f ${INSTLDIR}/etc/pacman.conf
+if [ -f pacman.conf.0 ]; then
+    # This file should be used in preference to pacman.conf - it is created by
+    # larch-setup on non-Arch systems before commenting out the 'Include' lines.
+    cp pacman.conf.0 ${INSTLDIR}/etc/pacman.conf
+else
+    sed '/^\[larch5\]/,/^ *$/ d' <pacman.conf >${INSTLDIR}/etc/pacman.conf
+fi
 
 # Generate glibc locales
 if [ -f ${PROFILE}/locale.gen ]; then

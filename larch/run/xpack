@@ -1,8 +1,8 @@
-#! /bin/sh
+#! /bin/bash
 #
 # xpack -  simple tool for handling self-extracting archives
 #
-# Author: Michael Towers (gradgrind) <mt.42@web.de>
+# Author: Michael Towers <gradgrind[at]online[dot]de>
 #
 #    xpack is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 #
 #----------------------------------------------------------------------------
 #
-# version 1.0
+# version 1.1
 
 # This script serves both as packer and extracter, according to the name used
 # to invoke it. When invoked as 'xpack', it will copy itself to the archive
@@ -30,7 +30,7 @@
 # To extract the archive, simply run the resulting archive file, passing a
 # directory into which it should be unpacked on the command line. E.g.
 #          ./xarchive newpath/to/directory
-# or,      sh xarchive newpath/to/directory
+# or,      bash xarchive newpath/to/directory
 
 if [ "$( basename "$0" )" != "xpack" ]; then
     # extract archive
@@ -52,7 +52,7 @@ if [ "$( basename "$0" )" != "xpack" ]; then
     echo "Extracting archive to $1"
     let "SKIP = $( grep --binary-files=text -n -m 1 "^#__ARCHIVE__" "$0" | cut -d ':' -f 1 ) + 1"
 
-    tail +$SKIP "$0" | tar -xzC "$1"
+    tail -n +$SKIP "$0" | tar -xzC "$1"
     exit 0
 fi
 

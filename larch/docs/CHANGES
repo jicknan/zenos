@@ -1,3 +1,13 @@
+2008.06.22
+Version 5.3.5
+Fix mklarch for building on non-Arch system:
+ - need to create package cache, otherwise inpacs complains.
+ - tweak pacman.conf configuration concerning 'Include =' lines.
+ - usb2bootiso needs bash (#!/bin/bash, not #!/bin/sh)
+ - xpack (and existing .xpk files) fix (bash, not sh, and -n option to tail)
+Try to overcome problems with usb-stick creation when hal remounts device
+after formatting, by adding umount command.
+
 2008.06.07
 Version 5.3.4
 Removed warnings about kconfig (as this is no longer included in Arch kernels.

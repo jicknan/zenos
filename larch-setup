@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.05.24
+# 2008.06.22
 
 REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
 #REPO=file://$( readlink -f larchrepo )
@@ -117,16 +117,18 @@ if ! which pacman &>/dev/null; then
         exit 1
     fi
     # Extract the needed files from the package
-    tar -xzf ${pf} -O usr/run/pacman.static >pacman
+    tar -xzf ${pf} -O usr/bin/pacman.static >pacman
     chmod 755 pacman
-    #tar -xzf ${pf} -O usr/run/repo-add >repo-add
+    #tar -xzf ${pf} -O usr/bin/repo-add >repo-add
     #chmod 755 repo-add
-    tar -xzf ${pf} -O etc/pacman.d/core >repolist
+    tar -xzf ${pf} -O etc/pacman.d/mirrorlist >repolist
     if ! [ -f pacman.conf ]; then
         tar -xzf ${pf} -O etc/pacman.conf >pacman.conf
         # Select a package server
         larch/run/getPackageServer -i repolist pacman.conf
         cp pacman.conf pacman.conf.0
+        # Prevent error messages because of missing /etc/pacman.d/mirrorlist
+        sed 's|^\(Include =\)|#\1|' -i pacman.conf
     fi
 fi
 

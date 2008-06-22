@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # usb2bootiso
 
@@ -10,7 +10,7 @@
 # If no path is given, a directory (or symlink) 'larchroot' in the
 # working directory will be used.
 #===================================================================
-# 2008.04.21
+# 2008.06.22
 
 APP="$( basename $0 )"
 # Get path to larch base directory, via the location of this script
