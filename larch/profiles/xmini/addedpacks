@@ -16,8 +16,8 @@ eject
 ntfsprogs
 parted
 
-ddcxinfo-knoppix
-hwd
+#ddcxinfo-knoppix
+#hwd
 
 sudo
 
@@ -36,7 +36,7 @@ larch
 openssh
 dosfstools
 lynx
-mc-utf8
+mc
 unzip
 zip
 alsa-lib

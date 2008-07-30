@@ -19,7 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #-------------------------------------------------------------------
-# 2008.06.19
+# 2008.07.30
 
 # Set this for your system (probably one of these is OK)
 base_lst = "/usr/share/X11/xkb/rules/base.lst"
@@ -401,11 +401,13 @@ class Xkbset:
             f.close()
         elif (savemode == 'all'):
             if os.path.isfile(self.configuser):
-                os.remove(self.configuser)
-            if (os.getuid() != 0):
-                cmd = "echo '%s %s %s' >%s" % (self.model,
-                        self.layout, self.variant, configall)
-                gui.rootrun(cmd)
+                try:
+                    os.remove(self.configuser)
+                except:
+                    pass
+            cmd = "echo '%s %s %s' >%s" % (self.model,
+                    self.layout, self.variant, configall)
+            gui.rootrun(cmd)
 
         popupMessage(_("Keyboard set to:\n"
                 "  model %s\n"

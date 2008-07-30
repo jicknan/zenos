@@ -1,3 +1,7 @@
+2008.07.30
+Version 5.3.6
+Remove unmaintained kde profile, replace mc-utf8 by mc in addedpacks
+
 2008.06.22
 Version 5.3.5
 Fix mklarch for building on non-Arch system:

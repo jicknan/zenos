@@ -36,7 +36,7 @@ a do-it-yourself live <em>Arch Linux</em> CD</h1>
 
 <p>Of course the details depend on what you have installed and how you have
 configured it. For example, the 'mini2' example profile builds a console-only system,
-the 'kde' profile boots to KDE.
+the 'xmaxi' profile boots to xfce4.
 </p>
 
 <p>One thing worth noting is that these supplied profiles automatically login
@@ -79,14 +79,13 @@ installed <em>Arch</em> sytem. If you are running a profile with X11, you may fi
 need to configure it before it will run. Since <em>Xorg</em> version 7.3, it
 is often possible to run without an <strong>/etc/X11/xorg.conf</strong>, but
 it may be necessary to create and tweak the configuration file for your system.
-A basic vesa configuration is supplied in the 'kde' profile, which should
-also work in many cases, but you can also try 'X -configure', 'xorgconfig' or
-'hwd -xa'. Start X with <em>startx</em>.
+You can try 'X -configure' or 'xorgconfig' to create a starting point which you can
+then tweak. Start X with <em>startx</em>.
 </p>
 
-<p>The 'xmini' profile uses a slightly more elaborate login approach on
-the first terminal, with a simple menu as well as automatic login. It also
-includes a logout gui for xfce, which together with the login script can
+<p>The 'xmini' and 'xmaxi' profiles use a slightly more elaborate login approach on
+the first terminal, with a simple menu as well as automatic login. There is also
+a logout gui for xfce, which together with the login script can
 trigger session saving directly, bypassing the console prompt.
 </p>
 
@@ -94,9 +93,7 @@ trigger session saving directly, bypassing the console prompt.
 newbie friendly as an X11 desktop, but still quite capable. I always like to have
 <em>mc</em> available, it's a real godsend for non-geeks (you should also install
 <em>lynx</em> so that HTML files can be displayed on the console - at a
-pinch you can also surf with it, but it is painful). Note that the <em>mc</em>
-package in the Arch 'extra' repository is not UTF-8 enabled, but in the
-community repo there is <em>mc-utf8</em>, which seems to work pretty well).
+pinch you can also surf with it, but it is painful).
 </p>
 
 <p>If your console keyboard map is
