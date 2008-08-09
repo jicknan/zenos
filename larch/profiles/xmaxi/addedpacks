@@ -16,9 +16,6 @@ eject
 ntfsprogs
 parted
 
-#ddcxinfo-knoppix
-#hwd
-
 sudo
 
 lsof
@@ -42,6 +39,7 @@ alsa-utils
 cdparanoia
 cdrdao
 cups
+cups-pdf
 gutenprint
 
 # Xorg packages
@@ -142,9 +140,6 @@ evince
 gthumb
 mirage
 
-# For cd/dvd burning gui k3b seems to be the only option at the moment -
-# as far as I can see, but it pulls in a lot of kde stuff.
-k3b
 scribus
 
 hplip

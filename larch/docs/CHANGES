@@ -1,3 +1,11 @@
+2008.08.09
+Version 5.3.7
+The packages.txt file is no longer supplied in Arch repositories, so inpacs
+now gets the list of base packages using (something like) 'pacman -Sg base'.
+As of pacman-3.2 there is no longer a static build, so building larch systems
+on non-Arch boxes will no longer work:(
+Tweaked xmaxi profile.
+
 2008.07.30
 Version 5.3.6
 Remove unmaintained kde profile, replace mc-utf8 by mc in addedpacks

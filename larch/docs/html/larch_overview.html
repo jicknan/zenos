@@ -273,11 +273,8 @@ packages. If <em>aufs</em> is desired (which is likely, as at the time of writin
 <h3><a name="Generating_the_basepacks_list"></a>Generating
 the <em>basepacks</em> list</h3>
 
-<p>In case the base package set changes, <strong>inpacs</strong> provides
-for downloading <strong>packages.txt</strong> from the 'core' repository (the
-first server containing '/core' in its path in the <strong>pacman.conf</strong>
-file is used). This file is then filtered using a simple <em>grep/sed</em>
-command to get the desired package list. However, if there is a 'basepacks'
+<p>In case the base package set changes, <strong>inpacs</strong> uses the list
+provided by 'pacman -Sg base' by default. However, if there is a 'basepacks'
 file in the profile this will be used to supply the list of base packages
 (one package per line).
 </p>

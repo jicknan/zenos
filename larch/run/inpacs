@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-#2008.02.13
+#2008.08.09
 
 # Note that this has quite a few differences to 'pacin' (now deprecated).
 # Read the usage blurb carefully, for example the options -c, -a (changed
@@ -203,69 +203,6 @@ PACMAN="${PACMANX} --config ${PACMANK} --noconfirm"
 rm -rf ${TMPDIR}
 mkdir -p ${TMPDIR}
 
-########## GET LIST OF BASE PACKAGES
-
-# Get the package server from the pacman configuration file
-CORESERVER=$( grep -m1 "^[ ]*Server.*/core/" ${PACMANK} | \
-        sed "s|^[ ]*Server[= ]*||" )
-
-echo "//"
-echo -n "// ** Getting base package list from: "
-if [ -n "${BASEPACKSFILE}" ]; then
-    echo "${BASEPACKSFILE}"
-    BASEPKGS=$( cat ${BASEPACKSFILE} | grep -v "#" )
-else
-    # If no 'core' repository source found, get it from
-    # /etc/pacman.d/mirrorlist (if using standard locations)
-    if [ -z "${CORESERVER}" ]; then
-        CORESERVER=$( grep -m1 '^[ ]*Server.*/$repo/' \
-                /etc/pacman.d/mirrorlist | \
-                sed -e 's|^[ ]*Server[= ]*||' -e 's|$repo|core|')
-        xs="or '/etc/pacman.d/mirrorlist' "
-    else
-        xs=""
-    fi
-    if [ -z "${CORESERVER}" ]; then
-        echo "???"
-        echo "ERROR: No 'core' repository found in '${PACMANK}'"
-        echo "${xs}and no explicit source for list of"
-        echo "base packages ('-b' option)."
-        echo
-        exitfunc 1
-    fi
-
-    echo "${CORESERVER}/packages.txt"
-    rm -f ${TMPDIR}/packages.txt
-    if [ -n "$( echo "${CORESERVER}" | grep "file://" )" ]; then
-        cp ${CORESERVER:8}/packages.txt ${TMPDIR}
-    else
-        wget -P ${TMPDIR} ${CORESERVER}/packages.txt
-    fi
-    # Get all packages in packages.txt in the 'base' section and strip
-    # them down to just package name
-    BASEPKGS=$( grep '^base/' ${TMPDIR}/packages.txt | \
-            sed -r 's|^base/||;s|-[^\-]+-[0-9.]+(-[a-z][^\-]*)?\.pkg.*||' )
-#    rm -f ${TMPDIR}/packages.txt
-fi
-echo "//"
-
-########## LIST OF BASE PACKAGES NOW IN ${BASEPKGS}
-
-########## FILTER LIST OF BASE PACKAGES
-
-# Build basepacks by filtering BASEPKGS
-: > ${basepacks}
-#
-# Filter out vetoed packages
-for p in ${BASEPKGS}; do
-    if [ -z "${VETOFILE}" ] || \
-            ! grep "^[ ]*${p}[ ]*\$" ${VETOFILE} &>/dev/null; then
-        echo ${p} >> ${basepacks}
-    fi
-done
-
-########## FILTERED BASE PACKAGE LIST NOW IN FILE ${basepacks}
-
 # Helper function for installing a list of packages
 doInstall() {
     mkdir -p ${INSTLDIR}/sys
@@ -310,6 +247,35 @@ else
     echo "//"
     ${PACMAN} -r ${INSTLDIR} -Sy
 fi
+
+########## GET LIST OF BASE PACKAGES
+
+echo "//"
+echo "// ** Getting base package list ..."
+if [ -n "${BASEPACKSFILE}" ]; then
+    echo "//    from: ${BASEPACKSFILE}"
+    BASEPKGS=$( cat ${BASEPACKSFILE} | grep -v "#" )
+else
+    BASEPKGS=$( ${PACMAN} -r ${INSTLDIR} -Sg base )
+fi
+echo "//"
+
+########## LIST OF BASE PACKAGES NOW IN ${BASEPKGS}
+
+########## FILTER LIST OF BASE PACKAGES
+
+# Build basepacks by filtering BASEPKGS
+: > ${basepacks}
+#
+# Filter out vetoed packages
+for p in ${BASEPKGS}; do
+    if [ -z "${VETOFILE}" ] || \
+            ! grep "^[ ]*${p}[ ]*\$" ${VETOFILE} &>/dev/null; then
+        echo ${p} >> ${basepacks}
+    fi
+done
+
+########## FILTERED BASE PACKAGE LIST NOW IN FILE ${basepacks}
 
 if [ -n "${ADDEDPACKS}" ]; then
     echo "//"
