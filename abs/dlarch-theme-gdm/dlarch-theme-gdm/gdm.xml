@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE greeter SYSTEM "greeter.dtd">
 <greeter>
-<!-- 
+<!--
 Author: Michael Towers, based on work by Christopher Daley
 Contact: gradgrind at online dot de
 Artwork: Gleidson Echeli
@@ -47,25 +47,25 @@ GDM Theming Reference: http://www.gnome.org/projects/gdm/docs/2.18/thememanual.h
         </box>
       </item>
       <item type="rect">
-    	<pos x="50%" y="45%" width="box" height="box" anchor="c"/>
+        <pos x="50%" y="45%" width="box" height="box" anchor="c"/>
         <box xpadding="40" ypadding="8" spacing="10" orientation="horizontal" homogeneous="false">
-		<!-- Sessions button -->
-		<item type="label" id="session_button" button="true">
-			<show modes="console"/>
-			<normal color="#4d4d4d" font="Sans 10"/>
-			<prelight color="#1793d1" font="Sans 10"/>
-			<active color="#4d4d4d" font="Sans 10"/>
-			<stock type="session"/>
-		</item>
-		<!-- Actions button -->
-		<item type="label" id="system_button" button="true">
-			<normal color="#4d4d4d" font="Sans 10"/>
-			<show modes="console"/>
-			<prelight color="#1793d1" font="Sans 10"/>
-			<active color="#4d4d4d" font="Sans 10"/>
-			<stock type="system"/>
-			<show modes="console"/>
-		</item>
+        <!-- Sessions button -->
+        <item type="label" id="session_button" button="true">
+            <show modes="console"/>
+            <normal color="#4d4d4d" font="Sans 10"/>
+            <prelight color="#1793d1" font="Sans 10"/>
+            <active color="#4d4d4d" font="Sans 10"/>
+            <stock type="session"/>
+        </item>
+        <!-- Actions button -->
+        <item type="label" id="system_button" button="true">
+            <normal color="#4d4d4d" font="Sans 10"/>
+            <show modes="console"/>
+            <prelight color="#1793d1" font="Sans 10"/>
+            <active color="#4d4d4d" font="Sans 10"/>
+            <stock type="system"/>
+            <show modes="console"/>
+        </item>
         </box>
       </item>
     </box>
@@ -102,6 +102,12 @@ GDM Theming Reference: http://www.gnome.org/projects/gdm/docs/2.18/thememanual.h
         <text>%c</text>
       </item>
     </box>
+  </item>
+
+  <!-- user-list -->
+  <item type="list" id="userlist">
+    <pos anchor="ne" x="25%" y="60%" height="50%" width="15%"/>
+    <color iconcolor="#000000" labelcolor="#405020"/>
   </item>
 
 </greeter>
