@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Build a self-contained pacman package, containing the necessary support
+# libraries, as a replacement for the no longer provided 'pacman.static'.
+
+echo "Have you checked that config/pacman.conf and config/mirrorlist"
+read -p  "are up to date? [y/N]: " ans
+if [ -z "$( echo ${ans} | grep '^ *[yY]' )" ]; then exit 0; fi
+
+p=$( which pacman )
+l=larch/lib
+rm -rf larch
+mkdir -p $l
+
+cp -r config larch
+
+for lib in $( ldd $p | grep "=> /" | \
+        sed -r "s|.*=> ([^ ]*).*|\1|" ); do
+    cp $lib $l
+done
+
+cp $p $l
+cp /lib/libnss_files.so.2 $l
+cp /lib/ld-linux*.so.2 $l/loader
+
+mkdir larch/run
+cp $( which repo-add ) larch/run
+cp pacman.sh larch/run/pacman
+chmod 755 larch/run/pacman
+
+tar -czf pacman-packed.tar.gz larch
+
+rm -rf larch

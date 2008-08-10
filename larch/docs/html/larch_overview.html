@@ -147,12 +147,10 @@ For example, you do not need support for <em>squashfs</em> or <em>aufs</em> on
 the build system. <em>bash</em>, <em>mkisofs</em> and <em>wget</em>
 are assumed to be available (for building a USB-stick version with syslinux you
 also need <em>mkfs.vfat</em> from the 'dosfstools' package). If you are not
-running <em>Arch Linux</em> you will need to fetch the pacman package from
-an <em>Arch</em> mirror (core repository, for your processor
-architecture) and extract the needed files. The installation script
-(<strong>larch-setup</strong>) deals with this automatically. If you want to
-use a local pacman package rather than downloading it, put that package in the
-working directory before running <strong>larch-setup</strong>.
+running <em>Arch Linux</em>, the installation script
+(<strong>larch-setup</strong>) will set up pacman using a special package
+available from the larch repository (pacman-packed.tar.gz), which contains
+in addition to the pacman binary the run-time libraries it needs.
 </p>
 
 <h3><a name="pacman_conf"></a>'pacman.conf' for building and live system use</h3>

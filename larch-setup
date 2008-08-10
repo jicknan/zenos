@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.06.22
+# 2008.08.10
 
 REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
 #REPO=file://$( readlink -f larchrepo )
@@ -37,14 +37,14 @@ if [ "$1" = "-h" ]; then
     echo "can be run from this directory, without installing."
     echo "It also generates appropriate symlinks."
     echo
-    echo "If there is no pacman in the PATH, a package can be fetched from"
-    echo "an Arch server and a statically linked pacman extracted to larch/bin."
+    echo "If there is no pacman in the PATH, a package containing the pacman"
+    echo "binary and the libraries it needs can be downloaded from the larch"
+    echo "site and a starter script placed in larch/run."
     echo "Also repo-add is extracted there and a pacman.conf is generated in"
     echo "the current directory, presenting a dialog for choosing the package"
     echo "server."
-    echo "You can avoid fetching a pacman package using ftp by placing one in"
-    echo "the current directory. You can use an existing pacman.conf by placing"
-    echo "this in the current directory."
+    echo "You can use an existing pacman.conf by placing this in the current"
+    echo "directory."
     echo
     exit
 fi
@@ -53,10 +53,6 @@ sysarch="$( uname -m )"
 if [ "${sysarch}" != "x86_64" ]; then
     sysarch="i686"
 fi
-
-archcore="ftp://ftp.archlinux.org/core/os \
-          ftp://ftp.heanet.ie/mirrors/ftp.archlinux.org/core/os \
-          ftp://ftp.belnet.be/packages/archlinux/core/os"
 
 # Get path to this directory, via the location of this script
 fullpath="$( readlink -f $0 )"
@@ -105,30 +101,25 @@ ln -s ${scriptdir}/larch/run/usb2bootiso usb2bootiso
 
 # Check that pacman is available.
 if ! which pacman &>/dev/null; then
-    # Fetch the pacman package from an Arch server if there isn't one
-    # in the current directory
-    for serv in ${archcore}; do
-        if [ -f pacman*.pkg.tar.gz ]; then break; fi
-        wget ${serv}/${sysarch}/pacman-*.pkg.tar.gz
-    done
-    pf=pacman-*.pkg.tar.gz
-    if ! [ -f ${pf} ]; then
-        echo "ERROR: couldn't fetch pacman package"
-        exit 1
-    fi
-    # Extract the needed files from the package
-    tar -xzf ${pf} -O usr/bin/pacman.static >pacman
-    chmod 755 pacman
-    #tar -xzf ${pf} -O usr/bin/repo-add >repo-add
-    #chmod 755 repo-add
-    tar -xzf ${pf} -O etc/pacman.d/mirrorlist >repolist
-    if ! [ -f pacman.conf ]; then
-        tar -xzf ${pf} -O etc/pacman.conf >pacman.conf
-        # Select a package server
-        larch/run/getPackageServer -i repolist pacman.conf
-        cp pacman.conf pacman.conf.0
-        # Prevent error messages because of missing /etc/pacman.d/mirrorlist
-        sed 's|^\(Include =\)|#\1|' -i pacman.conf
+    # Fetch the pacman package from the larch site if there isn't a
+    # pacman script in larch/run
+    if ! [ -f larch/run/pacman ]; then
+        fetch pacman-packed.tar.gz
+        if ! [ -f pacman-packed.tar.gz ]; then
+            echo "ERROR: couldn't fetch pacman package"
+            exit 1
+        fi
+        # Extract the needed files from the package
+        tar -xzf pacman-packed.tar.gz
+        cp larch/config/mirrorlist repolist
+        if ! [ -f pacman.conf ]; then
+            cp larch/config/pacman.conf pacman.conf
+            # Select a package server
+            larch/run/getPackageServer -i repolist pacman.conf
+            cp pacman.conf pacman.conf.0
+            # Prevent error messages because of missing /etc/pacman.d/mirrorlist
+            sed 's|^\(Include =\)|#\1|' -i pacman.conf
+        fi
     fi
 fi
 

@@ -1,7 +1,7 @@
 # Maintainer: Michael Towers <gradgrind[at]online[dot]de>
-# 2008.08.09
+# 2008.08.10
 pkgname=larch
-pkgver=5.3.7
+pkgver=5.3.8
 pkgrel=1
 
 # If I need the architecture, I can get it as ${CARCH}
@@ -27,4 +27,7 @@ build() {
   cp ${startdir}/larch.png ${startdir}/pkg/usr/share/pixmaps
   mkdir -p ${startdir}/pkg/usr/share/applications
   cp ${startdir}/larchdoc.desktop ${startdir}/pkg/usr/share/applications
+
+  # Adjust python script for architecture
+  sed -i ${startdir}/pkg/opt/larch/run/getPackageServer "s|_CARCH_|${CARCH}|"
 }

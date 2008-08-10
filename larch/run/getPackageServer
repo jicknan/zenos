@@ -22,7 +22,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-#2008.01.14
+#2008.08.10
 
 import getopt, sys, os
 from subprocess import Popen, PIPE, STDOUT
@@ -254,6 +254,8 @@ if __name__ == '__main__':
 
     # Generate pacman.conf file
     mirror = "Server = " + mirror
+    # The value for @carch@ will be substituted when building the package
+    mirror = mirror.replace("@carch@", "_CARCH_")
     pcfile = args[0]
     pcfh = open(pcfile, "r")
     pcf = pcfh.read()

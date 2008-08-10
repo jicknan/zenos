@@ -256,7 +256,7 @@ if [ -n "${BASEPACKSFILE}" ]; then
     echo "//    from: ${BASEPACKSFILE}"
     BASEPKGS=$( cat ${BASEPACKSFILE} | grep -v "#" )
 else
-    BASEPKGS=$( ${PACMAN} -r ${INSTLDIR} -Sg base )
+    BASEPKGS=$( ${PACMAN} -r ${INSTLDIR} -Sg base | sed 's|^base *||')
 fi
 echo "//"
 

@@ -1,0 +1,16 @@
+# Maintainer: Michael Towers <gradgrind[at]online[dot]de>
+
+pkgname=dlarch-theme-gdm
+pkgver=1.0
+pkgrel=1
+pkgdesc="Archlinux/larch greeter theme for the GNOME login manager"
+arch=(i686 x86_64)
+url="http://larch.berlios.de/"
+license=('GPL')
+depends=('gdm')
+
+build() {
+  mkdir -p $startdir/pkg/usr/share/gdm/themes
+  cp -r dlarch-*/ $startdir/pkg/usr/share/gdm/themes
+}
+

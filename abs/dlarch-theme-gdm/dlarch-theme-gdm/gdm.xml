@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE greeter SYSTEM "greeter.dtd">
+<greeter>
+<!-- 
+Author: Michael Towers, based on work by Christopher Daley
+Contact: gradgrind at online dot de
+Artwork: Gleidson Echeli
+Archlinux is a recognized trademark.
+GDM Theming Reference: http://www.gnome.org/projects/gdm/docs/2.18/thememanual.html
+-->
+
+  <!-- background -->
+  <item type="pixmap">
+    <normal file="background.png"/>
+    <pos y="0" x="0" width="100%" height="100%"/>
+  </item>
+
+  <!-- logo -->
+  <item type="pixmap">
+    <normal file="archlinux.png" alpha="1.0"/>
+    <pos x="50%" y="50%" anchor="c"/>
+  </item>
+
+  <!-- password box -->
+  <item type="rect">
+    <pos x="50%" y="78%" width="box" height="box" anchor="c"/>
+    <box xpadding="0" ypadding="0" spacing="5" orientation="vertical">
+      <item type="rect">
+        <pos x="0" y="0" width="box" height="box" expand="true"/>
+        <normal color="#4d4d4d" alpha="0.00"/>
+        <box xpadding="50" ypadding="15" spacing="10" orientation="vertical">
+          <item type="rect">
+            <normal color="#523921"/>
+            <pos width="160" height="24"/>
+            <fixed>
+              <item type="entry" id="user-pw-entry">
+                <pos y="1" x="1" width="-2" height="-2" anchor="nw"/>
+              </item>
+            </fixed>
+          </item>
+          <!-- timer warning -->
+          <item type="label" id="timed-label">
+            <show type="timed"/>
+            <normal font="Sans Bold 10" color="#1793d1"/>
+            <stock type="timed-label"/>
+          </item>
+        </box>
+      </item>
+      <item type="rect">
+    	<pos x="50%" y="45%" width="box" height="box" anchor="c"/>
+        <box xpadding="40" ypadding="8" spacing="10" orientation="horizontal" homogeneous="false">
+		<!-- Sessions button -->
+		<item type="label" id="session_button" button="true">
+			<show modes="console"/>
+			<normal color="#4d4d4d" font="Sans 10"/>
+			<prelight color="#1793d1" font="Sans 10"/>
+			<active color="#4d4d4d" font="Sans 10"/>
+			<stock type="session"/>
+		</item>
+		<!-- Actions button -->
+		<item type="label" id="system_button" button="true">
+			<normal color="#4d4d4d" font="Sans 10"/>
+			<show modes="console"/>
+			<prelight color="#1793d1" font="Sans 10"/>
+			<active color="#4d4d4d" font="Sans 10"/>
+			<stock type="system"/>
+			<show modes="console"/>
+		</item>
+        </box>
+      </item>
+    </box>
+  </item>
+
+
+  <!-- caps lock warning -->
+  <item type="label" id="caps-lock-warning">
+    <pos x="50%" y="90%" anchor="c"/>
+    <normal font="Sans Bold 10" color="#1793d1"/>
+    <stock type="caps-lock-warning"/>
+  </item>
+
+
+  <!-- pam error -->
+  <item type="label" id="pam-error">
+    <pos x="50%" y="88%" anchor="c" />
+    <normal font="Sans Bold 10" color="#1793d1"/>
+    <text></text>
+  </item>
+
+  <!-- hostname and clock -->
+  <item type="rect">
+    <pos x="100%" y="100%" width="box" height="42" anchor="se"/>
+    <box xpadding="10" spacing="10" orientation="horizontal">
+      <item type="label">
+        <pos x="100%" y="50%" anchor="e"/>
+        <normal font="Sans Bold 10" color="#4d4d4d"/>
+        <text>%h //</text>
+      </item>
+      <item type="label" id="clock">
+        <pos x="100%" y="50%" anchor="e"/>
+        <normal font="Sans 10" color="#4d4d4d"/>
+        <text>%c</text>
+      </item>
+    </box>
+  </item>
+
+</greeter>

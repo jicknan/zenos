@@ -1,0 +1,8 @@
+[GdmGreeterTheme]
+Encoding=UTF-8
+Greeter=gdm.xml
+Name=larch-dlarch
+Description=larch GDM theme based on darch for slim by Gleidson Echeli.
+Author=gradgrind
+Copyright=(c) 2008 Michael Towers (GPL licensed).
+Screenshot=preview.png
