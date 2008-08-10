@@ -10,6 +10,7 @@ license=('GPL')
 depends=('gdm')
 
 build() {
+  cd $startdir
   mkdir -p $startdir/pkg/usr/share/gdm/themes
   cp -r dlarch-*/ $startdir/pkg/usr/share/gdm/themes
 }

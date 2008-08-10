@@ -29,5 +29,5 @@ build() {
   cp ${startdir}/larchdoc.desktop ${startdir}/pkg/usr/share/applications
 
   # Adjust python script for architecture
-  sed -i ${startdir}/pkg/opt/larch/run/getPackageServer "s|_CARCH_|${CARCH}|"
+  sed "s/_CARCH_/${CARCH}/" -i ${startdir}/pkg/opt/larch/run/getPackageServer
 }
