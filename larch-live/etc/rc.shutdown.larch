@@ -4,7 +4,7 @@
 #
 
 ###
-# Based on initscripts 2008.05-1
+# Based on initscripts 2008.08-1
 ###
 
 . /etc/rc.conf
@@ -77,14 +77,14 @@ if [ "$PREVLEVEL" = "3" -o "$PREVLEVEL" = "5" ]; then
     let i=${#DAEMONS[@]}
     while [ $i -ge 0 ]; do
         if [ "${DAEMONS[$i]:0:1}" != '!' ]; then
-            ck_daemon ${DAEMONS[$i]#@} || /etc/rc.d/${DAEMONS[$i]#@} stop
+            ck_daemon ${DAEMONS[$i]#@} || stop_daemon ${DAEMONS[$i]#@}
         fi
         let i=i-1
     done
     # find any leftover daemons and shut them down in reverse order
     if [ -d /var/run/daemons ]; then
         for daemon in $(/bin/ls -1t /var/run/daemons); do
-            /etc/rc.d/$daemon stop
+            stop_daemon $daemon
         done
     fi
 fi
@@ -117,7 +117,7 @@ f_saveclock
 f_swapoff
 
 stat_busy "Unmounting Filesystems"
-/bin/umount -a -t noramfs,notmpfs,nosysfs,noproc
+/bin/umount -a -r -t noramfs,notmpfs,nosysfs,noproc
 stat_done
 
 # Kill non-root encrypted partition mappings

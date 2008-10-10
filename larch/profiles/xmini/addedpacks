@@ -16,9 +16,6 @@ eject
 ntfsprogs
 parted
 
-#ddcxinfo-knoppix
-#hwd
-
 sudo
 
 lsof

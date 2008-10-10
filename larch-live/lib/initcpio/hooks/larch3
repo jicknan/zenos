@@ -24,7 +24,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.04.04
+# 2008.10.10
 
 run_hook ()
 {
@@ -33,8 +33,6 @@ run_hook ()
         break="y"
         return
     fi
-
-    /sbin/modprobe loop
 
     # Path to compressed base system
     sysSqf=${cdmount}/system.sqf

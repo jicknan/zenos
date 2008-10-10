@@ -1,3 +1,11 @@
+2008.10.10
+Version 5.3.9
+larch-setup now creates relative (instead of absolute) symlinks.
+Workaround in inpacs for absence of /dev/null at beginning of installation
+(Arch bug). 
+larch-live package updated to version 5.3.4 for initscripts-2008.09-2
+and moved loading of loop module to larch1 hook, because of timing problems.
+
 2008.08.10
 Version 5.3.8
 Added pacman-packed.tar.gz to repository, a self-contained pacman package,

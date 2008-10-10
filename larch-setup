@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.08.10
+# 2008.09.14
 
 REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
 #REPO=file://$( readlink -f larchrepo )
@@ -94,10 +94,10 @@ tar -xzf larch-5*.pkg.tar.gz -C tmp
 mv tmp/opt/larch .
 rm -rf tmp
 
-ln -s ${scriptdir}/larch/run/mklarch mklarch
-ln -s ${scriptdir}/larch/run/larchify larchify
-ln -s ${scriptdir}/larch/run/inpacs inpacs
-ln -s ${scriptdir}/larch/run/usb2bootiso usb2bootiso
+ln -s larch/run/mklarch mklarch
+ln -s larch/run/larchify larchify
+ln -s larch/run/inpacs inpacs
+ln -s larch/run/usb2bootiso usb2bootiso
 
 # Check that pacman is available.
 if ! which pacman &>/dev/null; then

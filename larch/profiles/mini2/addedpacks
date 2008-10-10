@@ -15,8 +15,6 @@ eject
 # Useful for use as installer, etc.
 ntfsprogs
 parted
-#ddcxinfo-knoppix
-#hwd
 
 # generally useful tools which don't require X
 openssh

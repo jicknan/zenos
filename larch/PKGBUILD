@@ -1,7 +1,7 @@
 # Maintainer: Michael Towers <gradgrind[at]online[dot]de>
-# 2008.08.10
+# 2008.09.14
 pkgname=larch
-pkgver=5.3.8
+pkgver=5.3.9
 pkgrel=1
 
 # If I need the architecture, I can get it as ${CARCH}

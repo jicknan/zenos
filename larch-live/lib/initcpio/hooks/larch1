@@ -69,6 +69,8 @@ run_hook ()
     cdmount="/livecd"
     /bin/mkdir "${cdmount}"
 
+    /sbin/modprobe loop
+
     # look for livecd data directory, first try ${root}
     LDEV="${root}"
     if [ "x${LDEV}" != "x" ]; then
