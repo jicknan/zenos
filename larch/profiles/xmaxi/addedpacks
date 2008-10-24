@@ -63,7 +63,6 @@ xf86-video-glint
 xf86-video-i128
 xf86-video-i740
 #xf86-video-i810
-xf86-video-imstt
 xf86-video-intel
 xf86-video-mga
 xf86-video-neomagic
@@ -83,7 +82,6 @@ xf86-video-unichrome
 xf86-video-v4l
 xf86-video-vesa
 xf86-video-vga
-#xf86-video-via
 xf86-video-vmware
 xf86-video-voodoo
 
@@ -126,7 +124,6 @@ opera
 ttf-ms-fonts
 
 openoffice-base
-openoffice-spell-en
 
 libdvdcss
 lame
