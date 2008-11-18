@@ -19,7 +19,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.06.07
+# 2008.11.16
 
 # Location for the CD image
 CDDATA="${LARCHBUILD}/cd"
@@ -499,7 +499,7 @@ find_kernel ()
                 pkgs=""
                 for m in ${km}; do
                     # Use pacman to find the owning package
-                    p=$( chroot ${INSTLDIR} pacman -Qo ${m} )
+                    p=$( ${chrootx}pacman -Qo ${m} )
                     # Extract the package name, and surround it with '|'s for easier matching
                     pname="|$( echo "${p}" | cut -d " " -f 5 )|"
                     # Only report each package once

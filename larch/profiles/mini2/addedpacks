@@ -5,8 +5,6 @@ lzop
 
 syslinux
 
-# You need a kernel.
-#kernel26 is now in 'base'
 aufs
 
 # To eject a cd
@@ -25,5 +23,5 @@ unzip
 zip
 
 lsof
-#cdrkit
-#dvd+rw-tools
+cdrkit
+dvd+rw-tools

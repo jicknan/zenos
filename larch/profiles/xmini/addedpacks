@@ -5,8 +5,6 @@ lzop
 
 syslinux
 
-# You need a kernel.
-#kernel26 is now in 'base'
 aufs
 
 # To eject a cd
@@ -21,9 +19,6 @@ sudo
 lsof
 cdrkit
 dvd+rw-tools
-
-# Needed by the installer
-python
 
 base-devel
 larch
@@ -42,7 +37,6 @@ alsa-utils
 cdparanoia
 cdrdao
 cups
-gutenprint
 
 # Xorg packages
 xorg-server
@@ -65,7 +59,6 @@ xf86-video-glint
 xf86-video-i128
 xf86-video-i740
 #xf86-video-i810
-xf86-video-imstt
 xf86-video-intel
 xf86-video-mga
 xf86-video-neomagic
@@ -85,7 +78,6 @@ xf86-video-unichrome
 xf86-video-v4l
 xf86-video-vesa
 xf86-video-vga
-#xf86-video-via
 xf86-video-vmware
 xf86-video-voodoo
 
@@ -103,6 +95,7 @@ thunderbird
 # xfce
 xfce4
 thunar-volman
+thunar-archive-plugin
 xfce4-systemload-plugin
 xfce4-cpugraph-plugin
 xfce4-screenshooter-plugin

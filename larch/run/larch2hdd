@@ -1,0 +1,242 @@
+#!/bin/bash
+#
+# larch2hdd
+#
+# Author: Michael Towers <gradgrind[at]online[dot]de>
+
+# This file is part of the larch project.
+#
+#    larch is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    larch is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with larch; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+#----------------------------------------------------------------------------
+# 2008.11.18
+
+APP="$( basename $0 )"
+
+echo "//"
+echo "// **********************************************************"
+echo "//"
+echo "// ${APP} will install this larch live system to an existing"
+echo "// partition (not including changes you have made during the"
+echo "// current session). It can also install GRUB to the MBR."
+echo "//"
+echo "// As an alternative it might render your system unbootable."
+echo "// If that thought disturbs you please don't continue."
+echo "//"
+echo "// This program is DANGEROUS - you have been warned!!!"
+echo "//"
+# test if the script is started by root user. If not, exit
+if [ $UID -ne 0 ]; then
+    echo "Only root can run ${APP}"; exit 1
+fi
+
+echo "// If you are too cool to be concerned about the warnings,"
+echo "// please press 'y' and <Enter>."
+echo "//"
+echo "// **********************************************************"
+echo "//"
+read -p "// Continue? [y/N]: " ans
+if [ -z "$( echo ${ans} | grep '^ *[yY]' )" ]; then exit 0; fi
+
+if [ -f /.livesys/medium/boot/larch.img ]; then
+    bootdir=boot
+elif [ -f /.livesys/medium/isolinux/larch.img ]; then
+    bootdir=isolinux
+elif [ -f /.livesys/medium/syslinux/larch.img ]; then
+    bootdir=syslinux
+else
+    echo "ERROR: No larch system found"
+    exit 1
+fi
+
+echo "//"
+echo "// Enter the number of the partition you wish to use (0 to quit):"
+
+devices=/tmp/devices$$
+:> ${devices}
+i=0
+sfdisk -d | grep "/dev/[hs]d[a-z][1-4] " | grep -v "Id= [05]" | \
+        sed "s|\(.*\):.*size=\( *[0-9]*\).*|\1 \2|" | while read device sectors; do
+
+    i=$(( ${i} + 1 ))
+    echo "${device}" >>${devices}
+    echo "// ${i}: ${device} $(( ${sectors} / 2048 )) MiB"
+done
+
+while true; do
+    read -p "// Device: " d
+    if [ "${d}" -eq "0" ]; then exit 1; fi
+    i=0
+    { while read device; do
+        i=$(( ${i} + 1 ))
+        if [ "${d}" -eq "${i}" ]; then break 2; fi
+    done } <${devices}
+done
+
+rm ${devices}
+
+echo "//"
+echo "// \"${device}\" will now be formatted. All data on it will be lost."
+read -p "// Continue? [y/N]: " ans
+if [ -z "`echo ${ans} | grep '^ *[yY]'`" ]; then exit 0; fi
+
+echo "//"
+echo "// Formatting ${device} (ext2)"
+dev=${device:0:8}
+part=${device:8}
+sfdisk ${dev} -N${part} <<EOF
+,,L,*
+EOF
+
+mke2fs ${device}
+
+echo "// Copying the files"
+imp=/tmp/mnt$$
+mkdir -p ${imp}
+umount ${device} &>/dev/null
+mount ${device} ${imp}
+if [ $? != 0 ]; then
+  echo "ERROR: Failed to mount device, quitting"
+  exit 1
+fi
+if ! cp -a /.livesys/medium/* ${imp}; then
+    echo "// Couldn't copy live system."
+    umount ${imp}
+    exit 1
+fi
+
+mv ${imp}/${bootdir} ${imp}/bdtmp
+if [ -d ${imp}/boot ]; then
+    # Just in case ...
+    mv ${imp}/boot ${imp}/oldboot
+fi
+mkdir -p ${imp}/boot/grub
+mv ${imp}/bdtmp/vmlinuz ${imp}/boot
+mv ${imp}/bdtmp/larch.img ${imp}/boot
+rm -r ${imp}/bdtmp
+
+# Render this system invisible to a normal larch boot device search
+if [ -f ${imp}/larch/larchboot ]; then
+    mv ${imp}/larch/larchboot ${imp}/larch/no_larchboot
+fi
+
+# Set up menu.lst
+dmap=/tmp/device.map
+rm -f ${dmap}
+# First try to get a device mapping
+echo "quit" | grub --no-floppy --device-map=${dmap} --batch
+# Convert the device and partion to grub syntax
+## The contents of device.map look something like this:
+#(fd0)   /dev/fd0
+#(hd0)   /dev/hda
+#(hd1)   /dev/sda
+gdev="$( cat ${dmap} | grep "${dev}" | cut -f1  | tr -d "()" )"
+gpart=$(( ${part} - 1 ))
+rm -f ${dmap}
+
+# I think I can get the UUID of a partition like this:
+#uuid="$( blkid -c /dev/null -o value -s UUID ${device} )"
+
+cat >${imp}/boot/grub/menu.lst <<EOF
+# Config file for GRUB - The GNU GRand Unified Bootloader
+# /boot/grub/menu.lst
+
+# DEVICE NAME CONVERSIONS
+#
+#  Linux           Grub
+# -------------------------
+#  /dev/fd0        (fd0)
+#  /dev/hda        (hd0)
+#  /dev/hdb2       (hd1,1)
+#  /dev/hda3       (hd0,2)
+#
+
+#  FRAMEBUFFER RESOLUTION SETTINGS
+#     +-------------------------------------------------+
+#          | 640x480    800x600    1024x768   1280x1024
+#      ----+--------------------------------------------
+#      256 | 0x301=769  0x303=771  0x305=773   0x307=775
+#      32K | 0x310=784  0x313=787  0x316=790   0x319=793
+#      64K | 0x311=785  0x314=788  0x317=791   0x31A=794
+#      16M | 0x312=786  0x315=789  0x318=792   0x31B=795
+#     +-------------------------------------------------+
+
+# general configuration:
+timeout   5
+default   0
+color light-blue/black light-cyan/blue
+
+
+# boot sections follow
+# each is implicitly numbered from 0 in the order of appearance below
+#
+#-*
+
+#--- without separate boot partition
+#title  Arch Linux  [/boot/vmlinuz26]
+#root   (hd0,2)
+#kernel /boot/vmlinuz26 root=/dev/hda3 ro
+#initrd /boot/kernel26.img
+
+#--- with separate boot partition
+#title  Arch Linux  [/boot/vmlinuz26]
+#root   (hd0,0)
+#kernel /vmlinuz26 root=/dev/hda3 ro
+#initrd /kernel26.img
+
+#title Windows
+#rootnoverify (hd0,0)
+#makeactive
+#chainloader +1
+
+#=+============================================
+
+title Larch
+root (${gdev},${gpart})
+kernel /boot/vmlinuz root=${device} ro
+initrd /boot/larch.img
+
+#=-============================================
+EOF
+
+echo "// Would you like GRUB installed to the MBR of ${dev}?"
+echo "// Think carefully before answering 'yes' - any existing"
+echo "// bootloader will be overwritten."
+read -p "// Install GRUB to ${dev}? [y/N]: " ans
+if [ -n "`echo ${ans} | grep '^ *[yY]'`" ]; then
+    # Now actually install grub
+    # As far as I can tell, the extra options to grub are not needed here
+    echo "// Installing GRUB to MBR(${dev}), root ${device}"
+    grub-install --no-floppy --root-directory=${imp} ${dev}
+
+else
+    echo "// Installing GRUB to partition (${device})"
+    grub-install --no-floppy --root-directory=${imp} ${device}
+    echo "// In order to boot your new larch system you will need to"
+    echo "// configure your bootloader to boot this partition, for"
+    echo "// example in GRUB:"
+    echo "          title Larch"
+    echo "          rootnoverify (${gdev},${gpart})"
+    echo "          makeactive"
+    echo "          chainloader +1"
+
+fi
+echo "//"
+
+umount ${imp}
+
+echo "// Done!"
+echo "// If all went well you should now have a bootable larch system."
+echo ""
