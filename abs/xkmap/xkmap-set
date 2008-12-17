@@ -1,13 +1,12 @@
 #!/bin/sh
 
 # xkmap-set - run this during X start to set the keyboard selected by xkmap
+#             for the current user
 
 if [ -f ~/.xkmap.conf ]; then
     cfile="$( readlink -f ~/.xkmap.conf )"
-elif [ -f /etc/X11/xinit/xkmap.conf ]; then
-    cfile="/etc/X11/xinit/xkmap.conf"
 else
-    echo "xkmap-set: No settings file found (/etc/X11/xinit/xkmap.conf or ~/.xkmap.conf)" 1>&2
+    echo "xkmap-set: No settings file found (~/.xkmap.conf)" 1>&2
     echo "     Leaving default keyboard layout." 1>&2
     exit 1
 fi
