@@ -1,6 +1,6 @@
 install ()
 {
-    MODULES="vfat isofs ext2 ext3 nls_cp437"
+    MODULES="vfat isofs ext2 ext3 nls_cp437 loop"
     BINARIES=""
     FILES=""
     SCRIPT="larch1"

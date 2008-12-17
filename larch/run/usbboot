@@ -21,9 +21,11 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.06.22
+# 2008.12.09
 
 APP="$( basename $0 )"
+FULLPATH="$( readlink -f $0 )"
+DIR="$( dirname ${FULLPATH} )"
 
 usage () {
     echo
@@ -54,7 +56,7 @@ fi
 if ! [ -f ${AINSTALL}/usr/bin/syslinux ]; then
     echo "ERROR: syslinux not found -"
     echo "      it must be installed on live system"
-    return 1
+    exit 1
 fi
 
 echo "//"
@@ -107,7 +109,7 @@ rm ${devices}
 
 echo "//"
 read -p "// \"${device}\" will now be prepared. Continue? [y/N]: " ans
-if [ -z "`echo ${ans} | grep '^ *[yY]'`" ]; then exit 1; fi
+if [ -z "`echo ${ans} | grep '^ *[yY]'`" ]; then exit 2; fi
 
 echo "//"
 echo "// Formatting ${device} (vfat)"
@@ -153,3 +155,11 @@ fi
 echo "//"
 echo "// Done!"
 echo "// If all went well your usb stick should now be a bootable larch system"
+echo "//"
+echo "// Create a boot iso for this stick (to burn to a CD)?"
+# Await yes or no
+read -p "// [y/N]: " ans
+
+if [ -n "`echo ${ans} | grep '^ *[yY]'`" ]; then
+    ${DIR}/usb2bootiso
+fi

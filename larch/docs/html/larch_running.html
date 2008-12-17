@@ -70,6 +70,17 @@ pretty good and it doesn't occupy the CD-drive (if an extra boot CD is needed, o
 a machine that can't boot directly from USB, that can be removed after
 booting even without 'c2r').
 </p>
+<p>There are also boot options connected with the boot device. The 'nocd' boot
+option, if present, prevents booting from CD. This might be useful if you use a
+boot CD but want to boot a <em>larch</em> system on another device (normally
+a CD will be detected before other devices). This only works if the kernel is
+compatible of course.
+</p>
+<p>The 'root=' option allows explicit specification of the device containing the
+<em>larch</em> system. To handle delays arising from USB devices there is also
+a 'usbdelay=' option, to wait (time in seconds) before trying to mount the
+'root=' device.
+</p>
 
 <h4><a name="config"></a>Configuration</h4>
 
@@ -105,16 +116,9 @@ runs by performing a 'session-save'.
 
 <p>If you have a DHCP server on your network, you might well find that
 the network interface is configured automatically (assuming your <em>rc.conf</em>
-is configured appropriately). On my prototype, I could just fire up <em>konqueror</em>
-and the world was my oyster, as they say. If not, well I'm afraid it's
-not so easy. Until someone comes up with something better, you'll have
-to edit the appropriate configuration files (primarily '/etc/rc.conf')
-- see the <em>Arch Linux</em> documentation for details - and then do
-'/etc/rc.d/network start'. If you already have a running network
-interface but want to change it, you may need to stop it running first,
-using 'stop' instead of 'start', then make the changes, then start it.
-I don't know if 'restart' would work (it stops then starts the network)
-after a change to the configuration.
+is configured appropriately). Otherwise you can use any method to set up
+the network available in <em>Arch Linux</em> - see the appropriate
+<em>Arch Linux</em> documentation (primarily the wiki, I guess) for details.
 </p>
 
 <p>Of course the exact details of what you can do depends on what
@@ -147,8 +151,33 @@ completely normal <em>Arch Linux</em> installation. I should perhaps mention
 the file 'larch0' in the '/.livesys' directory (copied there from the 'larch/copy'
 directory on the boot medium). This script is run at the end of the installation
 (if it exists) and allows custom installation actions to be performed.
-The possibility of doing a completely fresh installation using ftp to
-fetch the latest packages may be added at some point, but that is not yet certain.
+</p>
+
+<h4><a name="install-live"></a>'Live' installation to hard disk</h4>
+<p>This is sometimes called a 'frugal' install and means that the system as it is
+(compressed, running in a <em>union</em> file system) on
+the USB-stick or CD is installed as a 'live' system to a hard-drive partition.
+This might be useful if you want to run from a flash device, for example, as it
+minimizes write operations to the device (normal access is read only).
+</p>
+<p>The <strong>larch2hdd</strong> script (in the <em>larch-live</em> package)
+performs such an installation. The partition for the installation should exist
+before calling this script, which will format it as <em>ext2</em>. The script
+will also install GRUB, either to the same partition or else to the MBR.
+</p>
+
+<h4><a name="create-iso"></a>Create a CD from a USB-stick live system</h4>
+<p>After you have created and customized a live system on a USB-stick you might
+like to 'fixate' it onto a CD. This can be done by the <strong>create-iso</strong>
+script in the <em>larch</em> package. It can be done from the running USB-stick
+session, so long as there is enough space in the current directory to build the
+<em>iso</em> (about twice the system size is needed). If there is not enough
+memory you could mount a disk partition and use that. Note that it is not the
+current state of the system that will be saved but the state after the last
+shutdown.
+</p>
+<p>The <em>iso</em> can also be created on another Linux system by passing the
+mount point of the USB-stick to the script as argument.
 </p>
 
 <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">

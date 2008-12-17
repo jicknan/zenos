@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# parted-lm
-
-# For each device return info about device type, size, and all partition info
-
-parted -lm

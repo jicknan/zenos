@@ -12,14 +12,12 @@ if [ -f ${INSTALL}/etc/rc.local.shutdown.orig ]; then
     mv ${INSTALL}/etc/rc.local.shutdown.orig ${INSTALL}/etc/rc.local.shutdown
 fi
 
-# slim is currently started in inittab
-#sed -i '/^DAEMONS=/ s|!slim|@slim|' ${INSTALL}/etc/rc.conf
+# start gdm from rc.conf
+sed -i '/^DAEMONS=/ s|!gdm|@gdm|' ${INSTALL}/etc/rc.conf
 
-# Copy xorg.conf.i810 to target xorg.conf if necessary
-if ! [ -f /etc/X11/xorg.conf ]; then
-    if grep i810 /proc/cmdline &>/dev/null; then
-        cp /etc/X11/xorg.conf.i810 ${INSTALL}/etc/X11/xorg.conf
-    fi
+# Copy xorg.conf.nodri to target xorg.conf if necessary
+if grep nodri /proc/cmdline &>/dev/null; then
+    cp -f /etc/X11/xorg.conf.nodri ${INSTALL}/etc/X11/xorg.conf
 fi
 
 #***************************************************#

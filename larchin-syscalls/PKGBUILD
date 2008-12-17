@@ -1,7 +1,7 @@
 # Maintainer: Michael Towers <gradgrind[at]online[dot]de>
-# 2008.06.06
+# 2008.12.17
 pkgname=larchin-syscalls
-pkgver=6.0.1
+pkgver=6.0.2
 pkgrel=1
 
 pkgdesc="bash scripts for larchin (larch hard disk installer with gui)"

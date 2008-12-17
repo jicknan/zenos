@@ -1,3 +1,22 @@
+2008.12.15
+larch and larch-live version 5.4.0.
+Added create-iso (build iso from larch USB-stick) to larch, removed usb2iso. 
+Added larch2hdd (frugal install) to larch-live, removed liveInstall.
+Switched to using static pacman from AUR for non-Arch build-hosts,
+(tar-ball now called packman-pack) larch-setup changed accordingly.
+Added 'nocd' boot option, to prevent booting from CD.
+Added 'usbdelay=' option, to wait (time in seconds) before trying to
+mount 'root=' device.
+addedpacks in example profiles edited to use xorg-video-drivers group,
+now that the conflicts have been resolved upstream.
+Example profiles use xorg.conf to disable hot-plugging input devices, to
+try to avoid problems here, at least until it has settled down a bit.
+xmaxi profile now includes gdm - and will use it when installed to hdd,
+though the live system doesn't use it.
+Documentation updates.
+Updated gen_fstab (larch-live) to create special entries for ntfs-3g and
+vfat.
+
 2008.10.10
 Version 5.3.9
 larch-setup now creates relative (instead of absolute) symlinks.

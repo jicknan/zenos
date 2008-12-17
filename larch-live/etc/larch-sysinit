@@ -23,7 +23,6 @@ f_fscheck ()
         grep " /.livesys/medium " /proc/mounts >>/etc/mtab
     fi
 
-    f_mountlocal
     stat_done
 
     if [ -z "$( cat /etc/fstab | grep "^#KEEP" )" ]; then
@@ -34,7 +33,7 @@ f_fscheck ()
 
     # now mount all the local filesystems
     stat_busy "Mounting Local Filesystems"
-    /bin/mount -a -t $NETFS
+    f_mountlocal
     stat_done
 }
 

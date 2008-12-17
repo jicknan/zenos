@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2007.12.17
+# 2008.12.15
 
 # Note that the results are, by default, not copied into place
 # They end up here:
@@ -68,8 +68,16 @@ sfdisk -d | grep "^/dev/" | sed "s|\(.*\):.*Id=\(..\).*|\1 \2|" | \
             removable="_rmv"
         fi
         mountdir=${part}${removable}
-        printf "%-12s %-12s %-8s user,noauto,noatime 0     0\n" \
-                ${dev} /mnt/${mountdir} auto >>${tmpfile}
+		if [ "${id}" = "7" ]; then
+			printf "%-12s %-8s %-8s users,noauto,utf8,umask=0 0 0\n" \
+					${dev} /mnt/${mountdir} ntfs-3g >>${tmpfile}
+		elif [ "${id}" = "b" -o "${id}" = "c" ]; then
+			printf "%-12s %-8s %-8s users,noauto,utf8,umask=0 0 0\n" \
+					${dev} /mnt/${mountdir} vfat >>${tmpfile}
+		else
+			printf "%-12s %-8s %-8s users,noauto,noatime 0 0\n" \
+					${dev} /mnt/${mountdir} auto >>${tmpfile}
+		fi
         mkdir -p ${MNT}/${mountdir}
     done
 

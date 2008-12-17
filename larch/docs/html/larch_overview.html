@@ -70,8 +70,8 @@ and the functions for performing the live CD creation are in the file
 (larch/)<strong>buildlive</strong>.
 </p>
 
-<p>Unlike a normal installation, that used by larch need not be a separate partition,
-it can be placed anywhere convenient.
+<p>Unlike a normal installation, that used by <em>larch</em> need not be a separate
+partition, it can be placed anywhere convenient.
 The default installation directory ('/home/larchroot', variable 'INSTLDIR' in the scripts)
 should normally be acceptable (the building work is done in the '.larch' sub-directory).
 Note that lots of space is necessary in ${INSTLDIR}, nearly 4GB for a 700MB CD.
@@ -136,6 +136,14 @@ The '-r' option causes the old squashed image to be used, which can save a lot
 time. To see all the options run './larchify -h'.
 </p>
 
+<h3><a name="usb2bootiso"></a>Building a boot CD for a USB-stick</h3>
+<p>If you are building a live USB-stick with the
+<em>syslinux</em> boot-loader you will be offered the option of generating a
+boot CD for booting the USB-stick on machines that do not support
+booting from USB. This can also be done subsequently using the
+<strong>usb2bootiso</strong> script.
+</p>
+
 <h3><a name="Minimal_build_system_requirements"></a>Minimal build system requirements</h3>
 
 <p>The <em>larch</em> scripts have been designed to work without heavy
@@ -149,8 +157,9 @@ are assumed to be available (for building a USB-stick version with syslinux you
 also need <em>mkfs.vfat</em> from the 'dosfstools' package). If you are not
 running <em>Arch Linux</em>, the installation script
 (<strong>larch-setup</strong>) will set up pacman using a special package
-available from the larch repository (pacman-packed.tar.gz), which contains
-in addition to the pacman binary the run-time libraries it needs.
+available from the <em>larch</em> repository (pacman-pack.tar.gz), which contains
+a statically linked pacman binary, the 'repo-add' script and the necessary
+configuration files.
 </p>
 
 <h3><a name="pacman_conf"></a>'pacman.conf' for building and live system use</h3>
@@ -177,8 +186,8 @@ used in preference.
 </p>
 <p>Additionally, an 'IgnorePkg' line is added to the live system's '/etc/pacman.conf',
 for 'kernel26', 'aufs' and 'initscripts'. Packages listed in the 'noupdate' file
-in the profile, will also be added.
-This line will be removed on installation using <em>larchin</em>.
+in the profile, will also be added. If you later use the graphical installer
+<em>larchin</em> this line will be removed automatically on the installed system.
 </p>
 
 <h3><a name="Squashfs_and_Unionfs"></a>squashfs and aufs</h3>
@@ -295,11 +304,12 @@ required by some other installed package.
 Here you can enter all the applications you would like in your live CD/USB system
 (and subsequently installed to a hard disk partition, if that was your intention).
 Thanks to <i>pacman</i> you don't need to sort out dependencies,
-these should all be included automatically. It is (still) possible to
+these should all be included automatically. It is possible to
 squeeze (or rather 'squash') quite a respectable quantity of software
 onto a CD - my first experiments included most of <i>KDE</i>,
 <i>OpenOffice</i>, <i>K3b</i>, <i>GIMP</i>, and quite a lot
-besides.</p>
+besides. This is however a while ago now and KDE and OpenOffice have probably
+got a lot bigger ...</p>
 
 <h3><a name="Installation"></a>Installation of the initial system</h3>
 

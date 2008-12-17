@@ -1,6 +1,6 @@
 install ()
 {
-    MODULES="squashfs loop reiserfs"
+    MODULES="squashfs reiserfs"
     BINARIES=""
     FILES=""
     SCRIPT="larch3"

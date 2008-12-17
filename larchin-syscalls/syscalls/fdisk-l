@@ -4,7 +4,7 @@
 
 # Get the general disk info returned by 'fdisk -l' applied to device $1
 #
-fdisk -l $1 | grep -A3 "$1:"
+LANG=C fdisk -l $1 | grep -A3 "$1:"
 
 # -> something like:
 #Disk /dev/sda: 16.1 GB, 16179527680 bytes

@@ -1,7 +1,7 @@
 # Maintainer: Michael Towers <gradgrind[at]online[dot]de>
 
 pkgname=dlarch-theme-gdm
-pkgver=1.1
+pkgver=1.2
 pkgrel=1
 pkgdesc="Archlinux/larch greeter theme for the GNOME login manager"
 arch=(i686 x86_64)

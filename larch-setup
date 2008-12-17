@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.09.14
+# 2008.12.09
 
 REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
 #REPO=file://$( readlink -f larchrepo )
@@ -37,9 +37,10 @@ if [ "$1" = "-h" ]; then
     echo "can be run from this directory, without installing."
     echo "It also generates appropriate symlinks."
     echo
-    echo "If there is no pacman in the PATH, a package containing the pacman"
-    echo "binary and the libraries it needs can be downloaded from the larch"
-    echo "site and a starter script placed in larch/run."
+    echo "If there is no pacman in the PATH, a package containing a"
+    echo "statically linked version of pacman and the configuration"
+    echo "files it needs can be downloaded from the larch site and"
+    echo "unpacked in the larch/run directory."
     echo "Also repo-add is extracted there and a pacman.conf is generated in"
     echo "the current directory, presenting a dialog for choosing the package"
     echo "server."
@@ -94,23 +95,23 @@ tar -xzf larch-5*.pkg.tar.gz -C tmp
 mv tmp/opt/larch .
 rm -rf tmp
 
-ln -s larch/run/mklarch mklarch
-ln -s larch/run/larchify larchify
-ln -s larch/run/inpacs inpacs
-ln -s larch/run/usb2bootiso usb2bootiso
+ln -s ${scriptdir}/larch/run/mklarch mklarch
+ln -s ${scriptdir}/larch/run/larchify larchify
+ln -s ${scriptdir}/larch/run/inpacs inpacs
+ln -s ${scriptdir}/larch/run/usb2bootiso usb2bootiso
 
 # Check that pacman is available.
 if ! which pacman &>/dev/null; then
     # Fetch the pacman package from the larch site if there isn't a
     # pacman script in larch/run
     if ! [ -f larch/run/pacman ]; then
-        fetch pacman-packed.tar.gz
-        if ! [ -f pacman-packed.tar.gz ]; then
+        fetch pacman-pack.tar.gz
+        if ! [ -f pacman-pack.tar.gz ]; then
             echo "ERROR: couldn't fetch pacman package"
             exit 1
         fi
         # Extract the needed files from the package
-        tar -xzf pacman-packed.tar.gz
+        tar -xzf pacman-pack.tar.gz
         cp larch/config/mirrorlist repolist
         if ! [ -f pacman.conf ]; then
             cp larch/config/pacman.conf pacman.conf

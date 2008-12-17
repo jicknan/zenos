@@ -21,7 +21,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-#2008.02.11
+#2008.12.14
 
 # Replacement for msg which includes leading and trailing spaces
 msg_ () { [ "${quiet}" != "y" ] && echo "$@"; }
@@ -74,6 +74,9 @@ run_hook ()
     # look for livecd data directory, first try ${root}
     LDEV="${root}"
     if [ "x${LDEV}" != "x" ]; then
+        if [ "x${usbdelay}" != "x" ]; then
+            /bin/sleep ${usbdelay}
+        fi
         /bin/mount -r -t iso9660 "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null || \
         /bin/mount -r -t vfat -o noatime,nodiratime "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null || \
         /bin/mount -r -t ext2 -o noatime,nodiratime "${LDEV}" "${cdmount}" >/dev/null 2>/dev/null
@@ -92,7 +95,7 @@ run_hook ()
     fi
 
     # then try cdroms
-    if [ "x${LDEV}" = "x" ]; then
+    if [ "x${LDEV}" = "x" ] && [ "x${nocd}" = "x" ]; then
         msg_ ":: Looking for boot device"
         cdroms=$( /bin/cat /proc/sys/dev/cdrom/info | { while read a b c; do
                 if [ "${a}" = "drive" -a "${b}" = "name:" ]; then

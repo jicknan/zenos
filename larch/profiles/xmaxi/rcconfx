@@ -15,4 +15,4 @@ USELVM="yes"
 
 eth0="dhcp"
 
-DAEMONS=(syslog-ng network dbus hal cups crond !sshd)
+DAEMONS=(syslog-ng @network dbus hal !gdm !cups !crond fam !sshd)

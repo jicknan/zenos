@@ -106,7 +106,7 @@ GDM Theming Reference: http://www.gnome.org/projects/gdm/docs/2.18/thememanual.h
 
   <!-- user-list -->
   <item type="list" id="userlist">
-    <pos anchor="ne" x="25%" y="60%" height="50%" width="15%"/>
+    <pos anchor="ne" x="20%" y="45%" height="50%" width="20%"/>
     <color iconcolor="#000000" labelcolor="#405020"/>
   </item>
 

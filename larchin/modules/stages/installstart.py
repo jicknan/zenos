@@ -19,7 +19,7 @@
 #    51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #----------------------------------------------------------------------------
-# 2008.06.13
+# 2008.12.16
 
 from stage import Stage
 from installstart_gui import PartTable
@@ -40,9 +40,6 @@ class Widget(Stage):
                 " installation (mount-points) corresponds with what you"
                 " had in mind. Accidents could well result in serious"
                 " data loss."))
-
-        # For size information
-        self.info = install.parted_lm().splitlines()
 
         # List of partitions configured for use.
         #    Each entry has the form [mount-point, device, format,
@@ -68,23 +65,13 @@ class Widget(Stage):
         self.addWidget(PartTable(plist))
 
     def getsize(self, part):
-        """Get the size of a partition using the output of 'parted -lm'
-        saved in self.info.
+        """Get the size of a partition using the output of 'get-partsize'.
         """
-        dev, partno = re.match(r"(/dev/[a-z]+)([0-9]+)", part).groups()
-        search = True
-        for line in self.info:
-            if line.startswith("/dev/"):
-                if not search:
-                    break
-                if line.startswith(dev+':'):
-                    search = False
-                continue
-            if search:
-                continue
-            if line.startswith(partno+':'):
-                return line.split(':')[3]
-        return "???"
+        s = install.get_partsize(part)
+        if s:
+            return s.strip()
+        else:
+            return "???"
 
     def forward(self):
         return 0

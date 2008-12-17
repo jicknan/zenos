@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Build a self-contained pacman package, containing the static binary.
+
+if ! [ -f pacman.static ]; then
+    echo "No pacman.static found - you must build it with the PKGBUILD"
+    echo "and put the binary in the build directory (the same one as"
+    echo "this script)."
+fi
+
+echo "Have you checked that config/pacman.conf and config/mirrorlist"
+read -p  "are up to date? [y/N]: " ans
+if [ -z "$( echo ${ans} | grep '^ *[yY]' )" ]; then exit 0; fi
+
+# test if the script is started by root user. If not, exit
+if [ $UID -ne 0 ]; then
+    echo "This should be run as root"; exit 1
+fi
+
+rm -rf larch
+mkdir -p larch/run
+
+cp -r config larch
+
+cp pacman.static larch/run/pacman
+cp $( which repo-add ) larch/run
+chmod 755 larch/run/pacman
+./pacman.static -V | grep "Pacman v" | sed "s|.*n v\([^ ]*\).*|\1|" \
+    > larch/.PACMAN-VERSION
+
+tar -czf pacman-pack.tar.gz larch
+
+rm -rf larch
