@@ -1,0 +1,10 @@
+post_install() {
+    echo "Creating INDEX. Please wait..."
+    cd /usr/share/ibus-pinyin/engine
+    python -c "import pysqlitedb; db = pysqlitedb.PYSQLiteDB (filename='py.db'); db.create_indexes ();"
+    echo "Done."
+}
+
+post_upgrade() {
+    post_install $1
+}

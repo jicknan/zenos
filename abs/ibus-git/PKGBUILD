@@ -1,0 +1,45 @@
+# Contributor: riverscn<riverscn at gmail.com>
+# Contributor: Lee.MaRS<leemars at gmail.com>
+pkgname=ibus-git
+pkgver=20081204
+pkgrel=1
+pkgdesc="Next Generation Input Bus for Linux"
+arch=('i686' 'x86_64')
+license=('LGPL')
+url="http://ibus.googlecode.com"
+depends=('dbus-python>=0.83.0' 'python>=2.5.0' 'pygtk' 'pyxdg' 'iso-codes' 'librsvg' 'notification-daemon')
+makedepends=('git' 'cvs' 'qt>=4.4.0')
+conflicts=('ibus')
+provides=('ibus')
+install=ibus.install
+source=()
+md5sums=()
+
+_gitname="ibus"
+_gitroot="git://github.com/phuang/ibus.git"
+
+build() {
+    cd ${srcdir}
+  
+    msg "Connecting to ${_gitname} GIT server..."
+    if [ -d ${srcdir}/${_gitname} ]; then
+        cd ${_gitname} && git pull origin
+        msg "The local files are updated."
+    else
+        git clone ${_gitroot}
+    fi
+
+    msg "GIT checkout done or server timeout. Preparing sources..."
+    rm -rf ${srcdir}/${_gitname}-build
+    cp -r ${srcdir}/${_gitname} ${srcdir}/${_gitname}-build
+
+    msg "Starting make..."
+    cd ${srcdir}/${_gitname}-build
+    ./autogen.sh --prefix=/usr \
+                 --enable-pygconf
+    
+    make || return 1
+    make DESTDIR=${pkgdir} install || return 1
+
+    rm -rf ${srcdir}/${_gitname}-build
+}

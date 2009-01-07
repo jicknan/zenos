@@ -1,0 +1,14 @@
+# Set the keymap
+xkmap-set
+
+case ${desktop} in
+    openbox ) exec openbox-session ;;
+
+    xfce ) exec startxfce4 ;;
+
+    gnome ) exec gnome-session ;;
+
+    kde ) exec startkde ;;
+
+    * ) ;;
+esac

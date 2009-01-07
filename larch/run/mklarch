@@ -26,7 +26,7 @@
 
 # directory to use for building the CD - the installation root
 # It must have LOTS of space, ~ 4GB for a 700MB CD
-INSTLDIR=/home/larchroot
+INSTLDIR="$( readlink -f larchroot )"
 
 # Default path to larch5 repositories (architecture is sub-directory)
 larch5path="ftp://ftp.berlios.de/pub/larch/larch5.3"

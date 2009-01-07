@@ -1,0 +1,18 @@
+#
+# patch file for /etc/rc.conf
+#
+
+LOCALE="en_US.utf8"
+HARDWARECLOCK="localtime"
+TIMEZONE="Asia/Shanghai"
+KEYMAP="us"
+
+MODULES=(acpi_cpufreqd)
+
+HOSTNAME="zen"
+
+USELVM="yes"
+
+eth0="dhcp"
+
+DAEMONS=(syslog-ng @network dbus hal @cpufreqd slim fam @sshd !wicd)

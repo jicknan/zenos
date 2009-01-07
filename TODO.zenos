@@ -1,0 +1,21 @@
+TODO for ZenOS
+==============
+* Add common user, request login too: guest:guest, root:root
+* lxde: 
+  * pcmanfm, and cope with conky
+  * lxappearance
+  * lxsession-lite [on]
+  * lxnm, alternative wicd and wlanassint
+* swap file or swap partition
+* Hard disk: smartctl, hdparm
+* ZenOS theme
+* build system [Not now]
+  * modular
+  * borrow from archiso-live
+* Intall dropbox to /opt w/o nautilus
+* umount speed up for cifs mount
+* im:
+  * linux-fetion
+  * wine-qq
+
+# vim:ft=asciidoc

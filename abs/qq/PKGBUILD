@@ -1,0 +1,36 @@
+# Contributor: leafduo <leafduo@gmail.com>
+# Maintainer : coderoar <coderoar@gmail.com>
+
+_arch="`arch`"
+_dependsarch="_depends$_arch"
+_dependsi686=('gtk2>=2.10' 'cairo' 'glibc>=2.0' 'pango>=1.0' 'glib2>=2.0')
+_dependsx86_64=('lib32-gtk2>=2.10' 'lib32-cairo' 'lib32-glibc>=2.0' 'lib32-pango>=1.0' 'lib32-glib2>=2.0' 'lib32-gvfs')
+
+pkgname=qq
+pkgver=1.0.2_beta1
+pkgver_=1.0.2-beta1
+pkgrel=1
+pkgdesc='instant messaging software'
+url='http://im.qq.com/qq/linux/'
+license=('custom')
+arch=('i686' 'x86_64')
+depends=${!_dependsarch}
+makedepends=('tar')
+source=("http://dl_dir.qq.com/linuxqq/linuxqq_v${pkgver_}_i386.deb" 'qq.sh')
+md5sums=('e269697840f53a8ea8306e600fbd4ed7'
+         'a81c8b85047a01031255a797c8a92769')
+
+build() {
+	cd ${srcdir}
+	ar vx linuxqq_v${pkgver_}_i386.deb
+	tar fxz data.tar.gz
+	if [[ $_arch == 'x86_64' ]]; then
+		cp ${srcdir}/qq.sh ${srcdir}/usr/bin/qq
+	fi
+	install -D -m755 usr/bin/qq ${pkgdir}/usr/bin/qq
+	install -D -m755 usr/share/tencent/qq/qq ${pkgdir}/usr/share/tencent/qq/qq
+	install -D -m644 usr/share/tencent/qq/qq.png ${pkgdir}/usr/share/tencent/qq/qq.png
+	install -D -m644 usr/share/tencent/qq/res.db ${pkgdir}/usr/share/tencent/qq/res.db
+	install -D -m644 usr/share/applications/qq.desktop ${pkgdir}/usr/share/applications/qq.desktop
+	install -D -m644 usr/share/doc/linuxqq/qq ${pkgdir}/usr/share/doc/linuxqq/qq
+}

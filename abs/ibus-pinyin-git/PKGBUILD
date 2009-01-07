@@ -1,0 +1,45 @@
+# Contributor: riverscn<riverscn at gmail.com>
+# Contributor: rainy<rainylau at gmail.com>
+pkgname=ibus-pinyin-git
+pkgver=20081204
+pkgrel=1
+pkgdesc="The PinYin Engine for IBus Input Framework"
+arch=('i686' 'x86_64')
+license=('LGPL')
+url="http://ibus.googlecode.com"
+depends=('ibus' 'python-pysqlite' 'aspell-en' 'pyenchant')
+makedepends=('git' 'cvs')
+conflicts=('ibus-pinyin')
+provides=('ibus-pinyin')
+install=ibus-pinyin.install
+source=(http://ibus.googlecode.com/files/pinyin-database-0.1.10.6.tar.bz2)
+noextract=(pinyin-database-0.1.10.6.tar.bz2)
+md5sums=('ebd8d2381993372bb97a877b549e14a0')
+
+_gitname="ibus-pinyin"
+_gitroot="git://github.com/phuang/ibus-pinyin.git"
+
+build() {
+    cd ${srcdir}
+
+    msg "Connecting to ${_gitname} GIT server..."
+    if [ -d ${srcdir}/${_gitname} ]; then
+        cd ${_gitname} && git pull origin
+        msg "The local files are updated."
+    else
+        git clone ${_gitroot}
+    fi
+
+    msg "GIT checkout done or server timeout. Preparing sources..."
+    rm -rf ${srcdir}/${_gitname}-build
+    cp -r ${srcdir}/${_gitname} ${srcdir}/${_gitname}-build
+    ln -s ${srcdir}/pinyin-database-0.1.10.6.tar.bz2 ${srcdir}/${_gitname}-build/engine/
+
+    msg "Starting make..."
+    cd ${srcdir}/${_gitname}-build
+    ./autogen.sh --prefix=/usr
+    make || return 1
+    make NO_INDEX=true DESTDIR=${pkgdir} install || return 1
+
+    rm -rf ${srcdir}/${_gitname}-build
+}

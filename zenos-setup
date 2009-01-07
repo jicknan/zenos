@@ -1,0 +1,17 @@
+#!/bin/bash
+
+LN="ln -svf"
+
+iln() {
+	[ -h $2 ] && rm $2
+	${LN} $1 $2
+}
+iln larch/run/mklarch mklarch
+iln larch/run/larchify larchify
+iln larch/run/inpacs inpacs
+iln larch/run/usb2bootiso usb2bootiso
+
+iln larch/profiles/zenos profile
+iln ../larchroot larchroot
+iln ../pkg pkg
+iln ../../../mirror/archlinux/files/larch5 larchrepo

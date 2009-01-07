@@ -32,6 +32,7 @@ fi
 
 # Underlying system:        /.livesys/system
 # 'mods' layer:             /.livesys/mods
+# 'home' layer:		    /.livesys/home
 # Overlay:                  /.livesys/overlay
 
 # The overlay device (where the archives will be saved)
@@ -81,6 +82,9 @@ echo "Mounting merge union"
 # This is using a new feature of aufs, to show whiteouts.
 layers="/.livesys/overlay=${ovl2mnt}:/.livesys/mods=${ovlmnt}"
 mount -t ${utype} -o ro,shwh,${bropt}${layers} ${utype} ${merge_union}
+if [ -d /.livesys/home ]; then
+	mount -o remount,append:/.livesys/home=${ovlmnt} ${merge_union}
+fi
 
 echo "Rebuilding 'mods' overlay to ${overlaypath}/mods.tmp"
 # Recreate the desired layout in a new directory, using mount --bind
@@ -106,7 +110,7 @@ rm -rf ${mods2}
 mkdir -p ${mods2}
 # root directories which are included in mods.sqf
 includedirs=""
-for d in bin boot home lib mnt opt root sbin srv usr var; do
+for d in bin boot lib mnt opt root sbin srv usr var; do
     if [ -d ${merge_union}/${d} ]; then
         includedirs="${includedirs} ${d}"
         mkdir ${mods2}/${d}
@@ -116,7 +120,7 @@ done
 
 # non-included /var directories
 vardirs="var/log var/tmp var/cache/pacman/pkg"
-mksquashfs ${mods2} "${overlaypath}/mods.tmp" -e ${vardirs}
+mksquashfs ${mods2} "${overlaypath}/mods.tmp" -e ${vardirs} -noappend
 res=$?
 for d in ${includedirs}; do
     umount ${mods2}/${d}
@@ -127,6 +131,26 @@ if [ ${res} -ne 0 ]; then
     echo "ERROR: Couldn't create ${overlaypath}/mods.tmp"
     rm -f "${overlaypath}/mods.tmp"
     exit 1
+fi
+
+if [ -d ${merge_union}/home ]; then
+	echo "Rebuilding 'home' overlay to ${overlaypath}/home.tmp"
+	home2=/.livesys/home2
+	rm -rf ${home2}
+	mkdir -p ${home2}/home
+	mount --bind ${merge_union}/home ${home2}/home
+
+	# excluded directories
+	vardirs=""
+	mksquashfs ${home2} "${overlaypath}/home.tmp" -e ${vardirs} -noappend
+	res=$?
+	umount ${home2}/home
+	rm -r ${home2}
+	if [ ${res} -ne 0 ]; then
+		echo "ERROR: Couldn't create ${overlaypath}/home.tmp"
+		rm -f "${overlaypath}/home.tmp"
+		exit 1
+	fi
 fi
 
 # Discard merge union
@@ -142,8 +166,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Renaming mods.tmp to mods.sqf_"
+echo "Renaming *.tmp to *.sqf_"
 mv "${overlaypath}/mods.tmp" "${overlaypath}/mods.sqf_"
+mv "${overlaypath}/home.tmp" "${overlaypath}/home.sqf_"
 echo "merging finished"
 
 exit 0

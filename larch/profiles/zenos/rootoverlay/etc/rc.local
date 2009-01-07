@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user startup script.
+#
+
+# Set up automatically logged in user (larch live system only)
+if [ -f /.livesys/autologin ]; then
+    cp /.livesys/autologin /tmp/newuser
+fi
+
+# Set up home.sqf
+livesys="/.livesys"
+cdmount="${livesys}/medium"
+homeSqf="${cdmount}/home.sqf"
+if [ -f ${homeSqf}_ ]; then
+	echo "Deal with new home.sqf archives..."
+
+	mount -o remount,rw ${cdmount}
+	[ -f ${homeSqf} ] && mv ${homeSqf} ${homeSqf}~
+	mv ${homeSqf}_ ${homeSqf}
+	mount -o remount,ro ${cdmount}
+fi
+if [ -f ${homeSqf} ]; then
+	echo "Setting up union file system for /home"
+	mkdir ${livesys}/home
+	mount -o ro,loop -t squashfs ${homeSqf} ${livesys}/home
+	mount -o remount,append:${livesys}/home=rr+wh /
+fi
+
+# Restore saved sound volume, etc.
+alsactl restore

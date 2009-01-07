@@ -23,7 +23,7 @@
 #----------------------------------------------------------------------------
 # 2008.12.09
 
-REPO="ftp://ftp.berlios.de/pub/larch/larch5.3/i686"
+REPO="ftp://192.168.1.99/DISK/archlinux/files/larch5"
 #REPO=file://$( readlink -f larchrepo )
 
 if [ "$1" = "-h" ]; then

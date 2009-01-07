@@ -1,0 +1,42 @@
+	ZenOS - My Portable Operating Environment
+
+Tags
+====
+- web, portable, personalized, thin
+- Archlinux, larch, googlize, Chinese, netbook
+
+Master
+======
+- gOS - quick-boot, googlize
+- Hiweed - Chinese things
+- FaunOS - larch/build root
+- archiso-live
+- Openfiler/FreeNAS - NAS/media box
+
+Links
+=====
+- larchrepo - larch5 and abs package repo
+- larchroot - working root dir
+- pkg - pkg cache when install
+
+
+Hardware Compatiable
+====================
+
+Notebook
+--------
+- Thinkpad X31, T42
+- Dell Latitude E5400
+
+Video Card
+----------
+- intel 845G/GL: dell dimension 2400
+
+Wireless Card
+-------------
+- Netgear WAG511: AR5212/AR5213|AR5001X+
+- Boardcom 43xx
+- Intel 4965bgn
+- Intel 2200G
+
+# vim:ft=asciidoc
