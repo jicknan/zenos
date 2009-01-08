@@ -46,6 +46,7 @@ tree
 bc
 hdsentinel
 smartmontools
+rsync
 
 cpufreqd
 cpufrequtils
@@ -114,6 +115,7 @@ skype
 #######################################################################
 ipw2200-fw
 iwlwifi-4965-ucode
+broadcom-wl
 
 #######################################################################
 # Chinese

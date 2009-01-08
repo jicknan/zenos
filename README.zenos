@@ -35,8 +35,8 @@ Video Card
 Wireless Card
 -------------
 - Netgear WAG511: AR5212/AR5213|AR5001X+
-- Boardcom 43xx
-- Intel 4965bgn
-- Intel 2200G
+- Boardcom 43xx - http://wiki.archlinux.org/index.php/Broadcom_BCM4312
+  * BCM4322, BCM43XG, BCM4328, BCM4312, BCM4310, BCM4312, BCM4311
+- Intel: 4965bgn, 2200G
 
 # vim:ft=asciidoc
