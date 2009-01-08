@@ -64,8 +64,11 @@ ctags
 git
 bash-completion
 asciidoc
+# for uuencode
+sharutils
 #geany
 #meld
+#poedit
 
 #######################################################################
 # Xorg packages
@@ -86,6 +89,7 @@ rxvt-unicode
 feh
 conky
 tpb
+xlockmore
 
 #######################################################################
 # X apps
