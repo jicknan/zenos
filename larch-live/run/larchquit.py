@@ -210,6 +210,8 @@ class Actions:
         os.system("echo '%s' > /tmp/xlogout" % data)
         if (session == "xfce"):
             os.system("sh -c 'sleep 0.5; xfce4-session-logout' &")
+        elif (session == "lxde"):
+            os.system("sh -c 'sleep 0.5; lxsession-logout' &")
         else:
             error(_("Unsupported session type: %s") % session)
         self.exit()

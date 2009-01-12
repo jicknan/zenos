@@ -9,7 +9,7 @@ KEYMAP="us"
 
 MODULES=(acpi_cpufreqd)
 
-HOSTNAME="zen"
+HOSTNAME="zenbox"
 
 USELVM="yes"
 

@@ -2,9 +2,6 @@ TODO for ZenOS
 ==============
 * Add common user, request login too: guest:guest, root:root
 * lxde: 
-  * pcmanfm, and cope with conky
-  * lxappearance
-  * lxsession-lite [on]
   * lxnm, alternative wicd and wlanassint
 * ZenOS theme
 * build system [Not now]
@@ -14,6 +11,22 @@ TODO for ZenOS
 * im:
   * linux-fetion
   * wine-qq
-* lxsession-logout
+* lxsession-logout - Faunos - virtualbox
+* gw6c
+* Googlize
+  * googleearth
+  * picasa
+* eye candy:
+  * grub-gfxmenu
+
+第一版发布事项
+==============
+
+- 代号“廿九，纪念 squashfs 进入 kernel 2.6.29
+- 准备中文安装文档
+- 学习 FaunOS 的发布方法
+- 发布文件包含：
+  * img 文件
+  * grub 的安装方法
 
 # vim:ft=asciidoc

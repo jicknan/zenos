@@ -64,6 +64,7 @@ ctags
 git
 bash-completion
 asciidoc
+docbook2x
 # for uuencode
 sharutils
 #geany

@@ -1,42 +1,72 @@
-	ZenOS - My Portable Operating Environment
+箴盒 —— 我的便携操作系统环境
 
-Tags
+介质
 ====
-- web, portable, personalized, thin
-- Archlinux, larch, googlize, Chinese, netbook
+- LiveUSB: 优盘、移动硬盘
 
-Master
-======
-- gOS - quick-boot, googlize
-- Hiweed - Chinese things
-- FaunOS - larch/build root
-- archiso-live
-- Openfiler/FreeNAS - NAS/media box
+标签
+====
+- 轻便、个人、携带、中文、定制
 
-Links
-=====
-- larchrepo - larch5 and abs package repo
-- larchroot - working root dir
-- pkg - pkg cache when install
+从头制作的方法
+==============
 
+提示： 本方法需要一定的 Linux 使用经验。
 
-Hardware Compatiable
-====================
+1.获得安装文件:
 
-Notebook
---------
-- Thinkpad X31, T42
+  git clone git://github.com/jicknan/zenos.git
+
+2.切换到 zenos 分支：
+
+  git checkout zenos
+
+3.建立必须的链接文件
+  你可能需要修改如下三个链接的位置：
+
+  * larchroot: 构建系统的主目录
+  * pkg: 构建系统时 pacman 下载文件的存放目录
+  * larchrepo: 自己编译的一些软件包, ibus, qq, larch 等
+
+  然后运行:
+
+  ./zenos-setup
+
+4.插入分好区的优盘或者移动硬盘。
+
+5.开始构建系统，运行：
+  
+  ./mklarch -ug -c pkg
+  
+  这个步骤会使用 pacman 下载所需的软件包，安装到 larchroot，制作 squashfs
+  文件，提示你选择安装的分区，并安装系统和 grub 到你指定的分区。
+
+兼容硬件
+========
+这里列出的仅仅是经过测试的硬件平台，没有列出并不代表不能支持。事实上，
+Archlinux 官方支持的硬件，箴盒都应该支持。
+
+笔记本
+------
+- Thinkpad: X31, T42
 - Dell Latitude E5400
 
-Video Card
-----------
-- intel 845G/GL: dell dimension 2400
+显卡
+----
+- Intel: 845G/GL, GM45
+- ATI: Radeon 9600, 7500, M6
 
-Wireless Card
--------------
-- Netgear WAG511: AR5212/AR5213|AR5001X+
-- Boardcom 43xx - http://wiki.archlinux.org/index.php/Broadcom_BCM4312
+无线网卡
+--------
+- Atheros: AR5xxx
+- Boardcom 43xx: http://wiki.archlinux.org/index.php/Broadcom_BCM4312
   * BCM4322, BCM43XG, BCM4328, BCM4312, BCM4310, BCM4312, BCM4311
-- Intel: 4965bgn, 2200G
+- Intel: 2200g, 4965bgn
 
-# vim:ft=asciidoc
+师从
+====
+- gOS: 快速启动、Google
+- Hiweed: 中文
+- FaunOS: larch, LiveUSB
+- archiso-live: 模块
+- Openfiler/FreeNAS: NAS, 媒体
