@@ -68,7 +68,8 @@ docbook2x
 # for uuencode
 sharutils
 #geany
-#meld
+meld
+wireshark
 #poedit
 
 #######################################################################

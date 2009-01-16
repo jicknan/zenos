@@ -2,7 +2,7 @@
 # 2008.12.15
 pkgname=larch-live
 pkgver=5.4.0
-pkgrel=5
+pkgrel=6
 
 pkgdesc="larch: compulsory components for the live system"
 url="http://larch.berlios.de"
