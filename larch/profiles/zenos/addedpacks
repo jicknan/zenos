@@ -47,6 +47,7 @@ bc
 hdsentinel
 smartmontools
 rsync
+unrar
 
 cpufreqd
 cpufrequtils
