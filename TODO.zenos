@@ -16,6 +16,8 @@ TODO for ZenOS
 * Googlize
   * googleearth
   * picasa
+* aufs merge 是的问题：如果在 overlay 已经删掉的文件，创建新的
+  sqsh 文件时，依然会回来，造成无法删除文件
 * eye candy:
   * grub-gfxmenu
 
