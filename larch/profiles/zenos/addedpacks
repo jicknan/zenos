@@ -63,6 +63,8 @@ base-devel
 vim
 ctags
 git
+cvs
+cvsps
 bash-completion
 asciidoc
 docbook2x
