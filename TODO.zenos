@@ -3,6 +3,7 @@ TODO for ZenOS
 * Add common user, request login too: guest:guest, root:root
 * lxde: 
   * lxnm, alternative wicd and wlanassint
+  * lunar plugin for lxpanel: http://packages.debian.org/unstable/utils/lunar
 * ZenOS theme
 * build system [Not now]
   * modular
