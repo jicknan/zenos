@@ -62,6 +62,7 @@ mplayer-plugin
 base-devel
 vim
 ctags
+tk
 git
 cvs
 cvsps
