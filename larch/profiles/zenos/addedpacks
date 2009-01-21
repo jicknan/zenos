@@ -74,6 +74,7 @@ sharutils
 meld
 wireshark
 #poedit
+nmap
 
 #######################################################################
 # Xorg packages
