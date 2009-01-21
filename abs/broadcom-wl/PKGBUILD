@@ -1,0 +1,34 @@
+# Maintainer: Alexandr Kotov nektokot at gmail dot com
+# Contributor: Carl Mueller math at carlm dot e4ward dot com
+# http://aur.archlinux.org/packages.php?ID=19514
+pkgname=broadcom-wl
+pkgver=5.10.27.12
+pkgrel=10
+pkgdesc="Broadcom 802.11abg Networking Drivers"
+arch=('i686 x86_64')
+[ "$CARCH" = "i686" ] && ARCH=x86-32
+[ "$CARCH" = "x86_64" ] && ARCH=x86-64
+url="http://www.broadcom.com"
+license=('Broadcom')
+depends=('kernel26>=2.6.28-3' 'kernel26<2.6.29')
+install=broadcom-wl.install
+source=('http://www.broadcom.com/docs/linux_sta/hybrid-portsrc-'$ARCH'_5_10_27_12.tar.gz')
+md5sums=('c39f8583eb6af67d23093114f95ecf6b')
+[ "$CARCH" = "x86_64" ] && md5sums=('269268e8b88676cd3efe867ce5d97d98')
+
+build() {
+  mv $srcdir/src/wl/sys/wl_iw.c $srcdir/src/wl/sys/wl_iw.c.old
+  sed -e 's/iwe_stream_add_.....(/&info, /' -e '127 c\
+int' <$srcdir/src/wl/sys/wl_iw.c.old >$srcdir/src/wl/sys/wl_iw.c
+  mv $srcdir/src/wl/sys/wl_linux.c $srcdir/src/wl/sys/wl_linux.c.old
+  sed -e '441 i\
+       \/\* Work around\. Default vlan_mode to off \*\/\
+       dev_wlc_intvar_set(dev, "vlan_mode", 0);\
+\ ' -e '284 i\
+extern int dev_wlc_intvar_set(struct net_device \*dev, char \*name, int val);\
+\ ' -e '248 i\
+MODULE_LICENSE("MIXED\/Proprietary");\
+\ ' <$srcdir/src/wl/sys/wl_linux.c.old >$srcdir/src/wl/sys/wl_linux.c              
+  KBUILD_NOPEDANTIC=1 make -C /lib/modules/`uname -r`/build M=`pwd` || return 1
+  install -D -m 755 wl.ko $pkgdir/lib/modules/$(uname -r)/kernel/drivers/net/wireless/wl.ko || return 1
+}
