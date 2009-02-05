@@ -120,6 +120,9 @@ flashplugin
 pidgin
 skype
 #xchat
+openoffice-base
+openoffice-zh_cn
+openoffice-zh_tw
 
 #######################################################################
 # driver
