@@ -1,0 +1,193 @@
+diff -ruN other/gw6c-config/src/gw6cconfig.cc mine/gw6c-config/src/gw6cconfig.cc
+--- other/gw6c-config/src/gw6cconfig.cc	2007-11-12 18:29:32.000000000 +0100
++++ mine/gw6c-config/src/gw6cconfig.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -24,7 +24,8 @@
+ #include <gw6cconfig/gw6cvalidation.h>
+ #include <gw6cconfig/gw6cuistrings.h>
+ #include <assert.h>
+-#include <string>
++#include <string.h>
++#include <stdlib.h>
+ 
+ 
+ // Configuration data variable NAMES
+diff -ruN other/gw6c-config/src/gw6c_c_wrapper.cc mine/gw6c-config/src/gw6c_c_wrapper.cc
+--- other/gw6c-config/src/gw6c_c_wrapper.cc	2007-11-12 18:29:31.000000000 +0100
++++ mine/gw6c-config/src/gw6c_c_wrapper.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -22,6 +22,8 @@
+ #include <gw6cconfig/gw6cuistrings.h>
+ using namespace gw6cconfig;
+ #include <assert.h>
++#include <string.h>
++#include <stdlib.h>
+ 
+ #ifdef WIN32
+ #define strcasecmp      _stricmp
+diff -ruN other/gw6c-config/src/gw6cvalidation.cc mine/gw6c-config/src/gw6cvalidation.cc
+--- other/gw6c-config/src/gw6cvalidation.cc	2007-11-12 21:50:25.000000000 +0100
++++ mine/gw6c-config/src/gw6cvalidation.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -37,6 +37,9 @@
+ #define INET_PTON(A, B, C)                inet_pton(A,B,C)
+ #endif
+ 
++#include <string.h>
++#include <stdlib.h>
++
+ 
+ // Definition of valid characters for different strings.
+ #define CFG_SERVER_CHRS                   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.:[]"
+diff -ruN other/gw6c-config/src/hap6devicemappingconfig.cc mine/gw6c-config/src/hap6devicemappingconfig.cc
+--- other/gw6c-config/src/hap6devicemappingconfig.cc	2007-03-06 22:29:56.000000000 +0100
++++ mine/gw6c-config/src/hap6devicemappingconfig.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -38,6 +38,9 @@
+ #define INET_PTON(A, B, C)                inet_pton(A,B,C)
+ #endif
+ 
++#include <string.h>
++#include <stdlib.h>
++
+ 
+ #define MAX_DEVICENAME_LEN  64
+ #define CHRS_DEVICENAME     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-"
+diff -ruN other/gw6c-config/src/hap6_devmap_c_wrap.cc mine/gw6c-config/src/hap6_devmap_c_wrap.cc
+--- other/gw6c-config/src/hap6_devmap_c_wrap.cc	2007-03-06 22:29:56.000000000 +0100
++++ mine/gw6c-config/src/hap6_devmap_c_wrap.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -23,6 +23,9 @@
+ using namespace gw6cconfig;
+ #include <assert.h>
+ 
++#include <string.h>
++#include <stdlib.h>
++
+ #ifdef WIN32
+ #define strcasecmp      _stricmp
+ #define strdup          _strdup
+diff -ruN other/gw6c-config/src/namevalueparser.cc mine/gw6c-config/src/namevalueparser.cc
+--- other/gw6c-config/src/namevalueparser.cc	2007-10-11 21:41:00.000000000 +0200
++++ mine/gw6c-config/src/namevalueparser.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -25,6 +25,7 @@
+ #include <fstream>
+ #include <time.h>
+ #include <assert.h>
++#include <string.h>
+ 
+ 
+ #define NV_SEPARATOR          "="                   // Name=value separator
+diff -ruN other/gw6c-messaging/src/clientmsgsender.cc mine/gw6c-messaging/src/clientmsgsender.cc
+--- other/gw6c-messaging/src/clientmsgsender.cc	2007-04-02 22:12:03.000000000 +0200
++++ mine/gw6c-messaging/src/clientmsgsender.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -20,6 +20,9 @@
+ #include <gw6cmessaging/clientmsgsender.h>
+ #include <assert.h>
+ 
++#include <string.h>
++#include <stdlib.h>
++
+ 
+ namespace gw6cmessaging
+ {
+diff -ruN other/gw6c-messaging/src/servermsgsender.cc mine/gw6c-messaging/src/servermsgsender.cc
+--- other/gw6c-messaging/src/servermsgsender.cc	2007-06-22 20:34:43.000000000 +0200
++++ mine/gw6c-messaging/src/servermsgsender.cc	2008-08-18 20:11:00.000000000 +0200
+@@ -20,6 +20,8 @@
+ #include <gw6cmessaging/servermsgsender.h>
+ #include <assert.h>
+ 
++#include <string.h>
++#include <stdlib.h>
+ 
+ #ifdef WIN32
+ #define snprintf _snprintf
+diff -ruN other/tspc-advanced/conf/gw6c.conf.in mine/tspc-advanced/conf/gw6c.conf.in
+--- other/tspc-advanced/conf/gw6c.conf.in	2007-11-28 18:27:05.000000000 +0100
++++ mine/tspc-advanced/conf/gw6c.conf.in	2008-08-18 20:11:00.000000000 +0200
+@@ -48,8 +48,7 @@
+ #   Freenet6 account holders should enter broker.freenet6.net, otherwise use
+ #   anon.freenet6.net. Your ISP may provide you with a different server name. 
+ #
+-server=
+-#server=anon.freenet6.net
++server=anon.freenet6.net
+ #server=broker.freenet6.net
+ 
+ #
+@@ -120,7 +119,7 @@
+ #   Directory where the Gateway6 Client will be installed. This value has been 
+ #   set during installation.
+ #
+-gw6_dir=@conf_gw6_dir@
++gw6_dir=/etc/gw6c/
+ 
+ #
+ # Auto-Retry Connect and Delay:
+@@ -219,7 +218,7 @@
+ #
+ #   broker_list=<file_name>
+ #  
+-broker_list=tsp-broker-list.txt
++broker_list=/var/run/gw6c/tsp-broker-list.txt
+ 
+ #
+ # Last Server Used File Name:
+@@ -229,7 +228,7 @@
+ #
+ #   last_server=<file_name>
+ #
+-last_server=tsp-last-server.txt
++last_server=/var/run/gw6c/tsp-last-server.txt
+ 
+ #
+ # Always Use Last Known Working Server:
+@@ -277,10 +276,10 @@
+ #     log_file=0
+ #     log_syslog=0
+ #
+-#log_console=
+-#log_stderr=
+-#log_file=
+-#log_syslog=
++log_console=
++log_stderr=0
++log_file=1
++log_syslog=1
+ 
+ #
+ # Log File Name:
+@@ -289,7 +288,7 @@
+ #
+ #   log_filename=<file_name>
+ #
+-log_filename=gw6c.log
++log_filename=/var/log/gw6c.log
+ 
+ #
+ # Log File Rotation:
+diff -ruN other/tspc-advanced/platform/linux/tsp_local.c mine/tspc-advanced/platform/linux/tsp_local.c
+--- other/tspc-advanced/platform/linux/tsp_local.c	2007-12-12 21:44:35.000000000 +0100
++++ mine/tspc-advanced/platform/linux/tsp_local.c	2008-08-18 20:11:00.000000000 +0200
+@@ -44,11 +44,11 @@
+ 
+ /* these globals are defined by US used by alot of things in  */
+ 
+-char *FileName  = "gw6c.conf";
++char *FileName  = "/etc/gw6c/gw6c.conf";
+ char *ScriptInterpretor = "/bin/sh";
+ char *ScriptExtension = "sh";
+ char *ScriptDir = NULL;
+-char *TspHomeDir = "/usr/local/etc/gw6";
++char *TspHomeDir = "/etc/gw6c/";
+ char DirSeparator = '/';
+ 
+ int RootUid = 0;
+diff -ruN other/tspc-advanced/template/linux.sh mine/tspc-advanced/template/linux.sh
+--- other/tspc-advanced/template/linux.sh	2007-12-07 20:23:10.000000000 +0100
++++ mine/tspc-advanced/template/linux.sh	2008-08-18 20:12:04.000000000 +0200
+@@ -78,7 +78,7 @@
+ 
+ ifconfig=/sbin/ifconfig
+ route=/sbin/route
+-ipconfig=/sbin/ip
++ipconfig=/usr/sbin/ip
+ rtadvd=/usr/sbin/radvd
+ rtadvd_pid=/var/run/radvd/radvd.pid
+ sysctl=/sbin/sysctl
