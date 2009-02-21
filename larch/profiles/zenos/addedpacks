@@ -77,6 +77,8 @@ meld
 wireshark
 #poedit
 nmap
+kqemu
+qemu
 
 #######################################################################
 # Xorg packages
