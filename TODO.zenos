@@ -6,9 +6,9 @@ TODO for ZenOS
   * lunar plugin for lxpanel: http://packages.debian.org/unstable/utils/lunar
 * ZenOS theme
 * build system [Not now]
-  * modular
+  * modular: lst2lmza
+  * sqlzma
   * borrow from archiso-live
-* umount speed up for cifs mount
 * im:
   * linux-fetion
   * wine-qq
@@ -17,7 +17,7 @@ TODO for ZenOS
 * Googlize
   * googleearth
   * picasa
-* aufs merge 是的问题：如果在 overlay 已经删掉的文件，创建新的
+* aufs merge 的问题：如果在 overlay 已经删掉的文件，创建新的
   sqsh 文件时，依然会回来，造成无法删除文件
 * eye candy:
   * grub-gfxmenu

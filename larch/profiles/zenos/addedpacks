@@ -2,7 +2,9 @@
 # These are needed to build a live CD
 #######################################################################
 larch-live
-squashfs-tools
+#squashfs-tools
+#sqlzma
+sqlzma-tools
 lzop
 #syslinux
 aufs
